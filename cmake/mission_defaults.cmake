@@ -24,6 +24,8 @@ set(MISSION_CORE_INTERFACES
 # NOTE: Everthing in this list becomes part of the "core_api" interface above.
 # Missions may add/remove/replace components in this list as needed.
 set(MISSION_CORE_MODULES
+    "edslib"
+    "missionlib"
     "es"
     "evs"
     "fs"
@@ -65,6 +67,10 @@ set(MISSION_MODULE_SEARCH_PATH
 # of the standard search path.
 set(osal_SEARCH_PATH ".")
 set(psp_SEARCH_PATH ".")
+
+# edslib and missionlib which exist under tools/eds (EDS runtime libraries)
+set(edslib_SEARCH_PATH "tools/eds")
+set(missionlib_SEARCH_PATH "tools/eds/cfecfs")
 
 # Include "cfe_assert" library in all builds, because it is included
 # in the default startup script.  It should not have any effect if not

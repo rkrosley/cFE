@@ -113,6 +113,9 @@ add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/cfe_module_version_table.c
         ${MISSION_BINARY_DIR}/src/cfe_module_version_table.c
 )
 
+# Reference the EDSLIB includes to instantiate the EDS-related objects
+include_directories(${edslib_MISSION_DIR}/fsw/inc)
+
 # Target for the final executable
 add_executable(core-${TGTNAME}
     ${MISSION_BINARY_DIR}/src/cfe_mission_strings.c
@@ -190,6 +193,35 @@ set(CFE_LINK_WHOLE_LIBS
 set(CFE_LINK_NORMAL_LIBS
     ${${TGTNAME}_PSP_MODULELIST}
     ${${TGTNAME}_STATIC_APPLIST}
+)
+
+# Determine EDS object linking mode for final executable.
+# This should be configured via the toolchain file,
+# with the default being FALSE (static link)
+if (CFE_SYSTEM_EDSDB_DYNAMIC_LINK)
+
+    # In this mode no static EDS object is linked
+    # The CFE_STATIC_EDSDB_OBJECT macro will be undefined
+    add_definitions(-UCFE_STATIC_EDSDB_OBJECT)    
+    
+else(CFE_SYSTEM_EDSDB_DYNAMIC_LINK)
+
+    # In this mode the full EDS object is statically linked
+    # The CFE_STATIC_EDSDB_OBJECT macro will be defined
+    add_definitions(-DCFE_STATIC_EDSDB_OBJECT=EDS_DATABASE)
+    
+    # In addition, also pull in the runtime lib, which
+    # supports script language bindings and UI display 
+    list(APPEND CFE_LINK_WHOLE_LIBS 
+        edslib_runtime_static 
+    )
+        
+endif(CFE_SYSTEM_EDSDB_DYNAMIC_LINK)    
+
+list(APPEND CFE_LINK_NORMAL_LIBS 
+    cfe_edsdb_static 
+    cfe_missionlib_runtime_static 
+    cfe_missionlib_interfacedb_static
 )
 
 # Handle the list of "embedded files" that should be linked into CFE.

@@ -37,6 +37,11 @@
 #ifndef SAMPLE_MISSION_CFG_H
 #define SAMPLE_MISSION_CFG_H
 
+/*
+ * Pull in defintions from EDS
+ */
+#include "samplemission_eds_designparameters.h"
+
 /**
 **  \cfesbcfg Maximum SB Message Size
 **

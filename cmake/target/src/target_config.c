@@ -40,6 +40,10 @@
 #include "cfe_es_resetdata_typedef.h"
 #include "cfe_version.h"   /* for CFE_VERSION_STRING */
 #include "osapi-version.h" /* for OS_VERSION_STRING */
+#include "cfecfs_version_info.h"
+#include "cfecfs_build_info.h"
+#include "edslib_api_types.h"
+#include "cfe_mission_eds_parameters.h"
 
 #ifndef CFE_CPU_NAME_VALUE
 #define CFE_CPU_NAME_VALUE "unknown"
@@ -156,6 +160,44 @@ Target_CfeConfigData GLOBAL_CFE_CONFIGDATA = {
     .RamDiskSectorSize   = CFE_PLATFORM_ES_RAM_DISK_SECTOR_SIZE,
     .RamDiskTotalSectors = CFE_PLATFORM_ES_RAM_DISK_NUM_SECTORS};
 
+/*
+ * Determine the proper values for populating the EDS-related
+ * fields of the configuration structure.  This depends on the
+ * selected linkage mode (static or dynamic).
+ */
+#ifdef CFE_STATIC_EDSDB_OBJECT
+
+/*
+ * Static EDS object link mode:
+ * Only the const pointer gets assigned to the EDS object, and the
+ * non-const pointer gets set NULL.  There are no "write" operations
+ * in this mode -- registration and de-registration is not necessary.
+ */
+#define CFE_CONST_EDSDB_PTR    &CFE_STATIC_EDSDB_OBJECT
+#define CFE_NONCONST_EDSDB_PTR NULL
+
+#else /* CFE_STATIC_EDSDB_OBJECT */
+
+/*
+ * Dynamic (non-const) runtime EDS database object
+ * This is filled in as additional EDS datasheet objects are registered
+ */
+static EdsLib_DataTypeDB_t CFE_DYNAMIC_EDS_TABLE[EDS_MAX_DATASHEETS] = {NULL};
+
+static EdsLib_DatabaseObject_t CFE_DYNAMIC_EDSDB_OBJECT = {.AppTableSize     = EDS_MAX_DATASHEETS,
+                                                           .DataTypeDB_Table = CFE_DYNAMIC_EDS_TABLE};
+
+/*
+ * Dynamic EDS object link mode:
+ * Both the const and non-const pointers get assigned to the same object.
+ * Runtime code should use the non-const pointer only for those operations
+ * that require a writable object (i.e. registration and de-registration)
+ */
+#define CFE_CONST_EDSDB_PTR    &CFE_DYNAMIC_EDSDB_OBJECT
+#define CFE_NONCONST_EDSDB_PTR &CFE_DYNAMIC_EDSDB_OBJECT
+
+#endif /* CFE_STATIC_EDSDB_OBJECT */
+
 /**
  * Instantiation of global system-wide configuration struct
  * This contains build info plus pointers to the PSP and CFE
@@ -178,4 +220,6 @@ Target_ConfigData GLOBAL_CONFIGDATA = {
     .ModuleVersionList       = CFE_MODULE_VERSION_TABLE,
     .CoreModuleList          = CFE_CORE_MODULE_LIST,
     .StaticAppList           = CFE_STATIC_APP_LIST,
+    .EdsDb                   = CFE_CONST_EDSDB_PTR,
+    .DynamicEdsDb            = CFE_NONCONST_EDSDB_PTR
 };
