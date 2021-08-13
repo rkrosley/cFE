@@ -161,7 +161,7 @@
               \cfetlmmnemonic  \SB_MSGLIMEC
             </LongDescription>
           </Entry>
-          <Entry name="MemPoolHandle" type="BASE_TYPES/CpuAddress" shortDescription="Handle to Software Bus Memory Pool">
+          <Entry name="MemPoolHandle" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemHandle_t" shortDescription="Handle to Software Bus Memory Pool">
             <LongDescription>
               \cfetlmmnemonic  \SB_MEMPOOLHANDLE
             </LongDescription>

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PackageFile xmlns="http://www.ccsds.org/schema/sois/seds">
+	<Package name="CFE_ES_EXTERN_TYPEDEFS">
+		<DataTypeSet>
+			<IntegerDataType name="CFE_ES_MemAddress_t">
+				<LongDescription>
+					*
+					* @brief Type used for memory addresses in command and telemetry messages
+					*
+					* For backward compatibility with existing CFE code this should be uint32,
+					* but if running on a 64-bit platform, addresses in telemetry will be
+					* truncated to 32 bits and therefore will not be valid.
+					*
+					* On 64-bit platforms this can be a 64-bit address which will allow the
+					* full memory address in commands and telemetry, but this will break
+					* compatibility with existing control systems, and may also change
+					* the alignment/padding of messages.
+					*
+					* In either case this must be an unsigned type.
+					*
+					* FSW code should access this value via the macros provided, which
+					* converts to the native "cpuaddr" type provided by OSAL.  This macro
+					* provides independence between the message representation and local
+					* representation of a memory address.
+				</LongDescription>
+				<IntegerDataEncoding encoding="unsigned" sizeInBits="32"/>
+				<Range>
+					<MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="4294967295"/>
+				</Range>
+			</IntegerDataType>
+			<SubRangeDataType name="CFE_ES_MemHandle_t" baseType="CFE_RESOURCEID/CFE_RESOURCEID_BASE_TYPE">
+				<LongDescription>
+					*
+					* @brief Memory Handle type
+					*
+					* Data type used to hold Handles of Memory Pools
+					* created via CFE_ES_PoolCreate and CFE_ES_PoolCreateNoSem
+				</LongDescription>
+				<Range>
+					<MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="4294967295"/>
+				</Range>
+			</SubRangeDataType>
+			<IntegerDataType name="CFE_ES_MemOffset_t">
+				<LongDescription>
+					*
+					* @brief Type used for memory sizes and offsets in commands and telemetry
+					*
+					* For backward compatibility with existing CFE code this should be uint32,
+					* but all telemetry information will be limited to 4GB in size as a result.
+					*
+					* On 64-bit platforms this can be a 64-bit value which will allow larger
+					* memory objects, but this will break compatibility with existing control
+					* systems, and may also change the alignment/padding of messages.
+					*
+					* In either case this must be an unsigned type.
+				</LongDescription>
+				<IntegerDataEncoding encoding="unsigned" sizeInBits="32"/>
+				<Range>
+					<MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="4294967295"/>
+				</Range>
+			</IntegerDataType>
+		</DataTypeSet>
+	</Package>
+</PackageFile>

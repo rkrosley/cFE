@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PackageFile xmlns="http://www.ccsds.org/schema/sois/seds">
+	<Package name="CFE_RESOURCEID">
+		<DataTypeSet>
+			<ContainerDataType name="CFE_ResourceId_t">
+				<LongDescription>
+					*
+					* @brief A type that provides a common, abstract identifier for
+					* all CFE managed resources (e.g. apps, tasks, counters, etc).
+					*
+					* Fundamentally an unsigned integer but users should treat it as
+					* opaque, and only go through the ES API for introspection.
+				</LongDescription>
+				<EntryList>
+					<Entry name="id" type="BASE_TYPES/uint32"/>
+				</EntryList>
+			</ContainerDataType>
+			<ContainerDataType name="CFE_RESOURCEID_BASE_TYPE" baseType="CFE_ResourceId_t">
+				<LongDescription>
+					*
+					* @brief A macro to generate a basetype for app-specific IDs
+					*
+					* Resource IDs may be "wrapped" a second time to make a unique
+					* typedef for application-specific ID values.
+					*
+					* Defining this base type as a macro rather than a typedef is intentional
+					* such that every time this is used it makes an equivalent but different
+					* type.  That is, it is a different type per the compiler type checking
+					* but has the same content/structure.
+				</LongDescription>
+			</ContainerDataType>
+		</DataTypeSet>
+	</Package>
+</PackageFile>

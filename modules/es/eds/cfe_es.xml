@@ -173,37 +173,37 @@
                \cfetlmmnemonic  \ES_ADDRVALID
             </LongDescription>
           </Entry>
-          <Entry name="CodeAddress" type="BASE_TYPES/CpuAddress" shortDescription="The Address of the Application Code Segment">
+          <Entry name="CodeAddress" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemAddress_t" shortDescription="The Address of the Application Code Segment">
             <LongDescription>
                \cfetlmmnemonic  \ES_CODEADDR
             </LongDescription>
           </Entry>
-          <Entry name="CodeSize" type="BASE_TYPES/CpuAddress" shortDescription="The Code Size of the Application">
+          <Entry name="CodeSize" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemOffset_t" shortDescription="The Code Size of the Application">
             <LongDescription>
                \cfetlmmnemonic  \ES_CODESIZE
             </LongDescription>
           </Entry>
-          <Entry name="DataAddress" type="BASE_TYPES/CpuAddress" shortDescription="The Address of the Application Data Segment">
+          <Entry name="DataAddress" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemAddress_t" shortDescription="The Address of the Application Data Segment">
             <LongDescription>
                \cfetlmmnemonic  \ES_DATAADDR
             </LongDescription>
           </Entry>
-          <Entry name="DataSize" type="BASE_TYPES/CpuAddress" shortDescription="The Data Size of the Application">
+          <Entry name="DataSize" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemOffset_t" shortDescription="The Data Size of the Application">
             <LongDescription>
                \cfetlmmnemonic  \ES_DATASIZE
             </LongDescription>
           </Entry>
-          <Entry name="BSSAddress" type="BASE_TYPES/CpuAddress" shortDescription="The Address of the Application BSS Segment">
+          <Entry name="BSSAddress" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemAddress_t" shortDescription="The Address of the Application BSS Segment">
             <LongDescription>
                \cfetlmmnemonic  \ES_BSSADDR
             </LongDescription>
           </Entry>
-          <Entry name="BSSSize" type="BASE_TYPES/CpuAddress" shortDescription="The BSS Size of the Application">
+          <Entry name="BSSSize" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemOffset_t" shortDescription="The BSS Size of the Application">
             <LongDescription>
                \cfetlmmnemonic  \ES_BSSSIZE
             </LongDescription>
           </Entry>
-          <Entry name="StartAddress" type="BASE_TYPES/CpuAddress" shortDescription="The Start Address of the Application">
+          <Entry name="StartAddress" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemAddress_t" shortDescription="The Start Address of the Application">
             <LongDescription>
                \cfetlmmnemonic  \ES_STARTADDR
             </LongDescription>
@@ -425,7 +425,7 @@
         </LongDescription>
         <EntryList>
           <Entry name="Application" type="BASE_TYPES/ApiName" shortDescription="RESERVED - should be all zeroes" />
-          <Entry name="PoolHandle" type="BASE_TYPES/CpuAddress" shortDescription="Handle of Pool whose statistics are to be telemetered" />
+          <Entry name="PoolHandle" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemHandle_t" shortDescription="Handle of Pool whose statistics are to be telemetered" />
         </EntryList>
       </ContainerDataType>
 
@@ -446,7 +446,7 @@
 
       <ContainerDataType name="PoolStatsTlm_Payload" shortDescription="Memory Pool Statistics Packet">
         <EntryList>
-          <Entry name="PoolHandle" type="BASE_TYPES/CpuAddress" shortDescription="Handle of memory pool whose stats are being telemetered">
+          <Entry name="PoolHandle" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemHandle_t" shortDescription="Handle of memory pool whose stats are being telemetered">
             <LongDescription>
                \cfetlmmnemonic  \ES_POOLHANDLE
             </LongDescription>
