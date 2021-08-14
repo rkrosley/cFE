@@ -144,6 +144,13 @@
           <MinMaxRange max="31" min="0" rangeType="inclusiveMinInclusiveMax"/>
         </Range>
       </IntegerDataType>
+		 
+			<IntegerDataType name="Telemetry_Subseconds_16_Type" quantityKind="timeQK" unit="second_65536">
+				<IntegerDataEncoding encoding="unsigned" sizeInBits="16"/>
+				<Range>
+					<MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="65535"/>
+				</Range>
+			</IntegerDataType>
 
       <ContainerDataType name="APIDqualifiers" shortDescription="Space packet APID qualifier header">
         <LongDescription>
@@ -190,7 +197,7 @@
          </LongDescription>
          <EntryList>
             <Entry name="Seconds" type="BASE_TYPES/uint32" shortDescription="Time since epoch, in seconds" />
-            <Entry name="Subseconds" type="${CFE_MISSION/TELEMETRY_SUBSECONDS_TYPE}" shortDescription="Time since epoch, in subseconds" />
+            <Entry name="Subseconds" type="${CCSDS_SPACEPACKET/TELEMETRY_SUBSECONDS_TYPE}" shortDescription="Time since epoch, in subseconds" />
          </EntryList>
       </ContainerDataType>
 

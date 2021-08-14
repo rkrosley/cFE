@@ -115,10 +115,11 @@
         </EnumerationList>
       </EnumeratedDataType>
 
-
+<!-- This appears to be obsolete.
       <StringDataType name="char_x_CFE_ES_MAX_SHELL_CMD" length="${CFE_MISSION/ES_MAX_SHELL_CMD}" />
-      <StringDataType name="char_x_CFE_ES_CDS_MAX_FULL_NAME_LEN" length="${CFE_MISSION/ES_CDS_MAX_FULL_NAME_LEN}" />
       <StringDataType name="char_x_CFE_ES_MAX_SHELL_PKT" length="${CFE_MISSION/ES_MAX_SHELL_PKT}" />
+-->			
+      <StringDataType name="char_x_CFE_ES_CDS_MAX_FULL_NAME_LEN" length="${CFE_MISSION/ES_CDS_MAX_FULL_NAME_LEN}" />
 
       <ArrayDataType name="boolean_x_CFE_ES_PERF_MAX_IDS" dataTypeRef="BASE_TYPES/StatusBit">
         <DimensionList>
@@ -251,7 +252,7 @@
 
       <ArrayDataType name="BlockStats_x_CFE_MAX_MEMPOOL_BLOCKS" dataTypeRef="BlockStats">
         <DimensionList>
-          <Dimension size="${CFE_MISSION/MAX_MEMPOOL_BLOCKS}" />
+          <Dimension size="${CFE_MISSION/ES_POOL_MAX_BUCKETS}" />
         </DimensionList>
       </ArrayDataType>
 
@@ -294,6 +295,7 @@
         </EntryList>
       </ContainerDataType>
 
+<!-- This appear to be obsolete.
       <ContainerDataType name="ShellCmd_Payload" shortDescription="Shell Command">
         <LongDescription>
           For command details, see #CFE_ES_SHELL_CMD_CC
@@ -303,6 +305,7 @@
           <Entry name="OutputFilename" type="BASE_TYPES/PathName" shortDescription="Filename where shell command output is to be written" />
         </EntryList>
       </ContainerDataType>
+-->
 
       <ContainerDataType name="FileNameCmd_Payload" shortDescription="Generic message payload for messages that require only a filename">
         <EntryList>
@@ -670,6 +673,7 @@
         </EntryList>
       </ContainerDataType>
 
+<!-- This appears to be obsolete.
       <ContainerDataType name="ShellPacket_Payload">
         <EntryList>
           <Entry name="ShellOutput" type="char_x_CFE_ES_MAX_SHELL_PKT">
@@ -680,6 +684,7 @@
           </Entry>
         </EntryList>
       </ContainerDataType>
+-->
 
       <ContainerDataType name="CommandBase" baseType="CCSDS/CommandPacket">
       </ContainerDataType>
@@ -696,11 +701,13 @@
         </EntryList>
       </ContainerDataType>
 
+<!-- This appears to be obsolete.
       <ContainerDataType name="ShellTlm" baseType="CCSDS/TelemetryPacket">
         <EntryList>
           <Entry type="ShellPacket_Payload" name="Payload" />
         </EntryList>
       </ContainerDataType>
+-->
 
       <ContainerDataType name="MemStatsTlm" baseType="CCSDS/TelemetryPacket">
         <EntryList>
@@ -857,6 +864,7 @@
         </EntryList>
       </ContainerDataType>
 
+<!-- This appears to be obsolete.
       <ContainerDataType name="Shell" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Executive Services O/S Shell Command
@@ -913,6 +921,7 @@
           <Entry type="ShellCmd_Payload" name="Payload" />
         </EntryList>
       </ContainerDataType>
+-->
 
       <ContainerDataType name="StartApp" baseType="CommandBase">
         <LongDescription>
@@ -2038,11 +2047,13 @@
               <GenericTypeMap name="TelemetryDataType" type="OneAppTlm" />
             </GenericTypeMapSet>
           </Interface>
+<!-- This appears to be obsolete.
           <Interface name="SHELL_TLM" shortDescription="telemetry interface" type="CFE_SB/Telemetry">
             <GenericTypeMapSet>
               <GenericTypeMap name="TelemetryDataType" type="ShellTlm" />
             </GenericTypeMapSet>
           </Interface>
+-->
           <Interface name="MEMSTATS_TLM" shortDescription="telemetry interface" type="CFE_SB/Telemetry">
             <GenericTypeMapSet>
               <GenericTypeMap name="TelemetryDataType" type="MemStatsTlm" />
@@ -2055,7 +2066,9 @@
             <Variable type="BASE_TYPES/uint16" readOnly="true" name="SendHkTopicId" initialValue="${CFE_MISSION/ES_SEND_HK_TOPICID}" />
             <Variable type="BASE_TYPES/uint16" readOnly="true" name="HkTlmTopicId" initialValue="${CFE_MISSION/ES_HK_TLM_TOPICID}" />
             <Variable type="BASE_TYPES/uint16" readOnly="true" name="AppTlmTopicId" initialValue="${CFE_MISSION/ES_APP_TLM_TOPICID}" />
+<!-- This appears to be obsolete.
             <Variable type="BASE_TYPES/uint16" readOnly="true" name="ShellTlmTopicId" initialValue="${CFE_MISSION/ES_SHELL_TLM_TOPICID}" />
+-->
             <Variable type="BASE_TYPES/uint16" readOnly="true" name="MemStatsTlmTopicId" initialValue="${CFE_MISSION/ES_MEMSTATS_TLM_TOPICID}" />
           </VariableSet>
           <!-- Assign fixed numbers to the "TopicId" parameter of each interface -->
@@ -2064,7 +2077,9 @@
             <ParameterMap interface="SEND_HK" parameter="TopicId" variableRef="SendHkTopicId" />
             <ParameterMap interface="HK_TLM" parameter="TopicId" variableRef="HkTlmTopicId" />
             <ParameterMap interface="APP_TLM" parameter="TopicId" variableRef="AppTlmTopicId" />
+<!-- This appears to be obsolete.
             <ParameterMap interface="SHELL_TLM" parameter="TopicId" variableRef="ShellTlmTopicId" />
+-->
             <ParameterMap interface="MEMSTATS_TLM" parameter="TopicId" variableRef="MemStatsTlmTopicId" />
           </ParameterMapSet>
         </Implementation>
