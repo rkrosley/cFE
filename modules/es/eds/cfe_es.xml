@@ -52,12 +52,14 @@
         <EnumerationList>
           <Enumeration label="CORE" value="1" shortDescription="CFE core application" />
           <Enumeration label="EXTERNAL"  value="2" shortDescription="CFE external application" />
+					<Enumeration label="LIBRARY" value="3" shortDescription="CFE library"/>
         </EnumerationList>
       </EnumeratedDataType>
 
       <EnumeratedDataType name="RunStatus" shortDescription="Run Status and Exit Status identifiers">
         <IntegerDataEncoding sizeInBits="32" encoding="unsigned" />
         <EnumerationList>
+					<Enumeration label="UNDEFINED" value="0" shortDescription="Reserved value, should not be used"/>
           <Enumeration label="APP_RUN" value="1" shortDescription="Indicates that the Application should continue to run" />
           <Enumeration label="APP_EXIT" value="2" shortDescription="Indicates that the Application wants to exit normally" />
           <Enumeration label="APP_ERROR" value="3" shortDescription="Indicates that the Application is quitting with an error" />
@@ -67,6 +69,7 @@
           <Enumeration label="SYS_DELETE" value="7" shortDescription="The system is requesting that the cFE App is stopped" />
           <Enumeration label="CORE_APP_INIT_ERROR" value="8" shortDescription="Indicates that the Core Application could not Init" />
           <Enumeration label="CORE_APP_RUNTIME_ERROR" value="9" shortDescription="Indicates that the Core Application had a runtime failure" />
+				  <Enumeration label="MAX" value="10" shortDescription="Reserved value, marker for the maximum state"/>
         </EnumerationList>
       </EnumeratedDataType>
 
@@ -114,6 +117,142 @@
           <Enumeration label="MAX" value="6" shortDescription="Reserved, placeholder for maximum value" />
         </EnumerationList>
       </EnumeratedDataType>
+			
+			<SubRangeDataType name="CFE_ES_AppId" baseType="CFE_RESOURCEID/CFE_RESOURCEID_BASE_TYPE">
+				<LongDescription>
+					*
+					* @brief A type for Application IDs
+					*
+					* This is the type that is used for any API accepting or returning an App ID
+				</LongDescription>
+				<Range>
+					<MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="4294967295"/>
+				</Range>
+			</SubRangeDataType>
+			
+			<SubRangeDataType name="CFE_ES_TaskId" baseType="CFE_RESOURCEID/CFE_RESOURCEID_BASE_TYPE">
+				<LongDescription>
+					*
+					* @brief A type for Task IDs
+					*
+					* This is the type that is used for any API accepting or returning a Task ID
+				</LongDescription>
+				<Range>
+					<MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="4294967295"/>
+				</Range>
+			</SubRangeDataType>
+			
+			<SubRangeDataType name="CFE_ES_LibId" baseType="CFE_RESOURCEID/CFE_RESOURCEID_BASE_TYPE">
+				<LongDescription>
+					*
+					* @brief A type for Library IDs
+					*
+					* This is the type that is used for any API accepting or returning a Lib ID
+				</LongDescription>
+				<Range>
+					<MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="4294967295"/>
+				</Range>
+			</SubRangeDataType>
+			
+			<SubRangeDataType name="CFE_ES_CounterId" baseType="CFE_RESOURCEID/CFE_RESOURCEID_BASE_TYPE">
+				<LongDescription>
+					*
+					* @brief A type for Counter IDs
+					*
+					* This is the type that is used for any API accepting or returning an Counter ID
+				</LongDescription>
+				<Range>
+					<MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="4294967295"/>
+				</Range>
+			</SubRangeDataType>
+			
+			<SubRangeDataType name="CFE_ES_MemHandle" baseType="CFE_RESOURCEID/CFE_RESOURCEID_BASE_TYPE">
+				<LongDescription>
+					*
+					* @brief Memory Handle type
+					*
+					* Data type used to hold Handles of Memory Pools
+					* created via CFE_ES_PoolCreate and CFE_ES_PoolCreateNoSem
+				</LongDescription>
+				<Range>
+					<MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="4294967295"/>
+				</Range>
+			</SubRangeDataType>
+			
+			<SubRangeDataType name="CFE_ES_CDSHandle" baseType="CFE_RESOURCEID/CFE_RESOURCEID_BASE_TYPE">
+				<LongDescription>
+					*
+					* @brief CDS Handle type
+					*
+					* Data type used to hold Handles of Critical Data Stores. See #CFE_ES_RegisterCDS
+				</LongDescription>
+				<Range>
+					<MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="4294967295"/>
+				</Range>
+			</SubRangeDataType>
+			
+			<IntegerDataType name="TaskPriority">
+				<LongDescription>
+					*
+					* @brief Type used for task priority in CFE ES as
+					* including the commands/telemetry messages.
+					*
+					* @note the valid range is only 0-255 (same as OSAL) but
+					* a wider type is used for backward compatibility
+					* in binary formats of messages.
+				</LongDescription>
+				<IntegerDataEncoding encoding="unsigned" sizeInBits="16"/>
+				<Range>
+					<MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="65535"/>
+				</Range>
+			</IntegerDataType>
+			
+			<IntegerDataType name="CFE_ES_MemOffset_t">
+				<LongDescription>
+					*
+					* @brief Type used for memory sizes and offsets in commands and telemetry
+					*
+					* For backward compatibility with existing CFE code this should be uint32,
+					* but all telemetry information will be limited to 4GB in size as a result.
+					*
+					* On 64-bit platforms this can be a 64-bit value which will allow larger
+					* memory objects, but this will break compatibility with existing control
+					* systems, and may also change the alignment/padding of messages.
+					*
+					* In either case this must be an unsigned type.
+				</LongDescription>
+				<IntegerDataEncoding encoding="unsigned" sizeInBits="32"/>
+				<Range>
+					<MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="4294967295"/>
+				</Range>
+			</IntegerDataType>
+			
+			<IntegerDataType name="CFE_ES_MemAddress">
+				<LongDescription>
+					*
+					* @brief Type used for memory addresses in command and telemetry messages
+					*
+					* For backward compatibility with existing CFE code this should be uint32,
+					* but if running on a 64-bit platform, addresses in telemetry will be
+					* truncated to 32 bits and therefore will not be valid.
+					*
+					* On 64-bit platforms this can be a 64-bit address which will allow the
+					* full memory address in commands and telemetry, but this will break
+					* compatibility with existing control systems, and may also change
+					* the alignment/padding of messages.
+					*
+					* In either case this must be an unsigned type.
+					*
+					* FSW code should access this value via the macros provided, which
+					* converts to the native "cpuaddr" type provided by OSAL.  This macro
+					* provides independence between the message representation and local
+					* representation of a memory address.
+				</LongDescription>
+				<IntegerDataEncoding encoding="unsigned" sizeInBits="32"/>
+				<Range>
+					<MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="4294967295"/>
+				</Range>
+			</IntegerDataType>
 
 <!-- This appears to be obsolete.
       <StringDataType name="char_x_CFE_ES_MAX_SHELL_CMD" length="${CFE_MISSION/ES_MAX_SHELL_CMD}" />
@@ -134,7 +273,7 @@
           QueryAll Commands.
         </LongDescription>
         <EntryList>
-          <Entry name="AppId" type="BASE_TYPES/uint32" shortDescription="Application ID for this Application">
+          <Entry name="ResourceId" type="BASE_TYPES/uint32" shortDescription="Application ID for this Application">
             <LongDescription>
                \cfetlmmnemonic  \ES_APP_ID
             </LongDescription>
@@ -174,37 +313,37 @@
                \cfetlmmnemonic  \ES_ADDRVALID
             </LongDescription>
           </Entry>
-          <Entry name="CodeAddress" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemAddress_t" shortDescription="The Address of the Application Code Segment">
+          <Entry name="CodeAddress" type="CFE_ES_MemAddress" shortDescription="The Address of the Application Code Segment">
             <LongDescription>
                \cfetlmmnemonic  \ES_CODEADDR
             </LongDescription>
           </Entry>
-          <Entry name="CodeSize" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemOffset_t" shortDescription="The Code Size of the Application">
+          <Entry name="CodeSize" type="CFE_ES_MemOffset_t" shortDescription="The Code Size of the Application">
             <LongDescription>
                \cfetlmmnemonic  \ES_CODESIZE
             </LongDescription>
           </Entry>
-          <Entry name="DataAddress" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemAddress_t" shortDescription="The Address of the Application Data Segment">
+          <Entry name="DataAddress" type="CFE_ES_MemAddress" shortDescription="The Address of the Application Data Segment">
             <LongDescription>
                \cfetlmmnemonic  \ES_DATAADDR
             </LongDescription>
           </Entry>
-          <Entry name="DataSize" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemOffset_t" shortDescription="The Data Size of the Application">
+          <Entry name="DataSize" type="CFE_ES_MemOffset_t" shortDescription="The Data Size of the Application">
             <LongDescription>
                \cfetlmmnemonic  \ES_DATASIZE
             </LongDescription>
           </Entry>
-          <Entry name="BSSAddress" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemAddress_t" shortDescription="The Address of the Application BSS Segment">
+          <Entry name="BSSAddress" type="CFE_ES_MemAddress" shortDescription="The Address of the Application BSS Segment">
             <LongDescription>
                \cfetlmmnemonic  \ES_BSSADDR
             </LongDescription>
           </Entry>
-          <Entry name="BSSSize" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemOffset_t" shortDescription="The BSS Size of the Application">
+          <Entry name="BSSSize" type="CFE_ES_MemOffset_t" shortDescription="The BSS Size of the Application">
             <LongDescription>
                \cfetlmmnemonic  \ES_BSSSIZE
             </LongDescription>
           </Entry>
-          <Entry name="StartAddress" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemAddress_t" shortDescription="The Start Address of the Application">
+          <Entry name="StartAddress" type="CFE_ES_MemAddress" shortDescription="The Start Address of the Application">
             <LongDescription>
                \cfetlmmnemonic  \ES_STARTADDR
             </LongDescription>
@@ -214,7 +353,7 @@
                \cfetlmmnemonic  \ES_EXCEPTNACTN
             </LongDescription>
           </Entry>
-          <Entry name="Priority" type="BASE_TYPES/uint16" shortDescription="The Priority of the Application">
+          <Entry name="Priority" type="TaskPriority" shortDescription="The Priority of the Application">
             <LongDescription>
                \cfetlmmnemonic  \ES_PRIORITY
             </LongDescription>
@@ -241,6 +380,31 @@
           </Entry>
         </EntryList>
       </ContainerDataType>
+			
+			<ContainerDataType name="TaskInfo">
+				<LongDescription>
+					*
+					* \brief Task Information
+					*
+					* Structure that is used to provide information about a task. It is primarily
+					* used for the Query All Tasks (#CFE_ES_QUERY_ALL_TASKS_CC) command.
+					*
+					* \note There is not currently a telemetry message directly containing this
+					* data structure, but it does define the format of the data file generated
+					* by the Query All Tasks command.  Therefore it should be considered
+					* part of the overall telemetry interface.
+				</LongDescription>
+				<EntryList>
+					<Entry name="TaskId" type="CFE_ES_TaskId" shortDescription="*&lt; \brief Task Id"/>
+					<Entry name="ExecutionCounter" type="BASE_TYPES/uint32" shortDescription="*&lt; \brief Task Execution Counter"/>
+					<Entry name="TaskName" type="BASE_TYPES/ApiName" shortDescription="*&lt; \brief Task Name"/>
+					<Entry name="AppId" type="CFE_ES_AppId" shortDescription="*&lt; \brief Parent Application ID"/>
+					<Entry name="AppName" type="BASE_TYPES/ApiName" shortDescription="*&lt; \brief Parent Application Name"/>
+					<Entry name="StackSize" type="CFE_ES_MemOffset_t" shortDescription="*&lt; Size of task stack"/>
+					<Entry name="Priority" type="TaskPriority" shortDescription="*&lt; Priority of task"/>
+					<PaddingEntry sizeInBits="16" shortDescription="*&lt; Spare bytes for alignment"/>
+				</EntryList>
+			</ContainerDataType>
 
       <ContainerDataType name="BlockStats" shortDescription="Memory Pool Statistics data type">
         <EntryList>
@@ -428,7 +592,7 @@
         </LongDescription>
         <EntryList>
           <Entry name="Application" type="BASE_TYPES/ApiName" shortDescription="RESERVED - should be all zeroes" />
-          <Entry name="PoolHandle" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemHandle_t" shortDescription="Handle of Pool whose statistics are to be telemetered" />
+          <Entry name="PoolHandle" type="CFE_ES_MemHandle" shortDescription="Handle of Pool whose statistics are to be telemetered" />
         </EntryList>
       </ContainerDataType>
 
@@ -449,7 +613,7 @@
 
       <ContainerDataType name="PoolStatsTlm_Payload" shortDescription="Memory Pool Statistics Packet">
         <EntryList>
-          <Entry name="PoolHandle" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemHandle_t" shortDescription="Handle of memory pool whose stats are being telemetered">
+          <Entry name="PoolHandle" type="CFE_ES_MemHandle" shortDescription="Handle of memory pool whose stats are being telemetered">
             <LongDescription>
                \cfetlmmnemonic  \ES_POOLHANDLE
             </LongDescription>
@@ -716,7 +880,7 @@
       </ContainerDataType>
 
 
-      <ContainerDataType name="Noop" baseType="CommandBase">
+      <ContainerDataType name="NoopCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Executive Services No-Op
 
@@ -756,7 +920,7 @@
         </ConstraintSet>
       </ContainerDataType>
 
-      <ContainerDataType name="ResetCounters" baseType="CommandBase">
+      <ContainerDataType name="ResetCountersCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Executive Services Reset Counters
 
@@ -803,7 +967,7 @@
         </ConstraintSet>
       </ContainerDataType>
 
-      <ContainerDataType name="Restart" baseType="CommandBase">
+      <ContainerDataType name="RestartCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Executive Services Processor / Power-On Reset
 
@@ -923,7 +1087,7 @@
       </ContainerDataType>
 -->
 
-      <ContainerDataType name="StartApp" baseType="CommandBase">
+      <ContainerDataType name="StartAppCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Load and Start an Application
 
@@ -980,7 +1144,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="StopApp" baseType="CommandBase">
+      <ContainerDataType name="StopAppCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Stop and Unload Application
 
@@ -1041,7 +1205,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="RestartApp" baseType="CommandBase">
+      <ContainerDataType name="RestartAppCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Stops and Restarts an Application
 
@@ -1095,7 +1259,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="ReloadApp" baseType="CommandBase">
+      <ContainerDataType name="ReloadAppCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Stops, Unloads, Loads from a File and Restarts an Application
 
@@ -1152,7 +1316,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="QueryOne" baseType="CommandBase">
+      <ContainerDataType name="QueryOneCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Request Executive Services Information on a Specified Application
 
@@ -1200,7 +1364,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="QueryAll" baseType="CommandBase">
+      <ContainerDataType name="QueryAllCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Writes all Executive Services Information on All Applications to a File
 
@@ -1253,7 +1417,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="ClearSyslog" baseType="CommandBase">
+      <ContainerDataType name="ClearSysLogCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Clear Executive Services System Log
 
@@ -1299,7 +1463,7 @@
         </ConstraintSet>
       </ContainerDataType>
 
-      <ContainerDataType name="WriteSyslog" baseType="CommandBase">
+      <ContainerDataType name="WriteSysLogCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Writes contents of Executive Services System Log to a File
 
@@ -1310,7 +1474,7 @@
           \cfecmdmnemonic  \ES_WRITESYSLOG2FILE
 
           \par  Command Structure
-          #CFE_ES_WriteSyslogCmd_t
+          #CFE_ES_WriteSysLogCmd_t
 
           \par  Command Verification
 
@@ -1353,7 +1517,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="ClearERLog" baseType="CommandBase">
+      <ContainerDataType name="ClearERLogCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Clears the contents of the Exeception and Reset Log
 
@@ -1398,7 +1562,7 @@
         </ConstraintSet>
       </ContainerDataType>
 
-      <ContainerDataType name="WriteERLog" baseType="CommandBase">
+      <ContainerDataType name="WriteERLogCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Writes Exeception and Reset Log to a File
 
@@ -1451,7 +1615,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="StartPerfData" baseType="CommandBase">
+      <ContainerDataType name="StartPerfDataCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Start Performance Analyzer
 
@@ -1508,7 +1672,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="StopPerfData" baseType="CommandBase">
+      <ContainerDataType name="StopPerfDataCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Stop Performance Analyzer
 
@@ -1562,7 +1726,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="SetPerfFilterMask" baseType="CommandBase">
+      <ContainerDataType name="SetPerfFilterMaskCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Set Performance Analyzer's Filter Masks
 
@@ -1611,7 +1775,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="SetPerfTriggerMask" baseType="CommandBase">
+      <ContainerDataType name="SetPerfTriggerMaskCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Set Performance Analyzer's Trigger Masks
 
@@ -1659,7 +1823,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="OverWriteSyslog" baseType="CommandBase">
+      <ContainerDataType name="OverWriteSysLogCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Set Executive Services System Log Mode to Discard/Overwrite
 
@@ -1711,7 +1875,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="ResetPRCount" baseType="CommandBase">
+      <ContainerDataType name="ResetPRCountCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Resets the Processor Reset Counter to Zero
 
@@ -1759,7 +1923,7 @@
         </ConstraintSet>
       </ContainerDataType>
 
-      <ContainerDataType name="SetMaxPRCount" baseType="CommandBase">
+      <ContainerDataType name="SetMaxPRCountCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Configure the Maximum Number of Processor Resets before a Power-On Reset
 
@@ -1811,7 +1975,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="DeleteCDS" baseType="CommandBase">
+      <ContainerDataType name="DeleteCDSCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Delete Critical Data Store
 
@@ -1865,7 +2029,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="SendMemPoolStats" baseType="CommandBase">
+      <ContainerDataType name="SendMemPoolStatsCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Telemeter Memory Pool Statistics
 
@@ -1916,7 +2080,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="DumpCDSRegistry" baseType="CommandBase">
+      <ContainerDataType name="DumpCDSRegistryCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Dump Critical Data Store Registry to a File
 
@@ -1968,7 +2132,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="QueryAllTasks" baseType="CommandBase">
+      <ContainerDataType name="QueryAllTasksCmd" baseType="CommandBase">
         <LongDescription>
           \cfeescmd  Writes a list of All Executive Services Tasks to a File
 

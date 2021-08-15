@@ -31,7 +31,13 @@
 #include "common_types.h"
 #include "cfe_platform_cfg.h"
 
+/* This header may be generated from an EDS file,
+ * tools are available and the feature is enabled */
+#ifndef CFE_EDS_ENABLED_BUILD
+
 #include "cfe_evs_msg.h" /* Required for CFE_EVS_LongEventTlm_t definition */
+
+#endif /* CFE_EDS_ENABLED_BUILD */
 
 /*
 ** \brief  EVS Log type definition. This is declared here so ES can include it

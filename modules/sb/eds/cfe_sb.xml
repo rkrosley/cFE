@@ -37,12 +37,12 @@
         </Range>
       </IntegerDataType>
 
-      <IntegerDataType name="PipeId" shortDescription="A Software Bus pipe identifier">
-        <IntegerDataEncoding sizeInBits="8" encoding="unsigned" />
+      <SubRangeDataType name="CFE_SB_PipeId" baseType="CFE_RESOURCEID/CFE_RESOURCEID_BASE_TYPE"
+												shortDescription="A Software Bus pipe identifier">
         <Range>
-          <MinMaxRange max="255" min="0" rangeType="inclusiveMinInclusiveMax"/>
-        </Range>
-      </IntegerDataType>
+					<MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="4294967295"/>
+				</Range>
+      </SubRangeDataType>
 
       <IntegerDataType name="MsgRouteIdx" shortDescription="A Software Bus internal route index">
         <IntegerDataEncoding sizeInBits="16" encoding="unsigned" />
@@ -95,7 +95,7 @@
         </LongDescription>
         <EntryList>
           <Entry name="MsgId" type="MsgId" shortDescription="Message ID of route to be enabled or disabled #CFE_SB_MsgId_t" />
-          <Entry name="Pipe" type="PipeId" shortDescription="Pipe ID of route to be enabled or disabled #CFE_SB_PipeId_t" />
+          <Entry name="Pipe" type="CFE_SB_PipeId" shortDescription="Pipe ID of route to be enabled or disabled #CFE_SB_PipeId_t" />
         </EntryList>
       </ContainerDataType>
 
@@ -161,7 +161,7 @@
               \cfetlmmnemonic  \SB_MSGLIMEC
             </LongDescription>
           </Entry>
-          <Entry name="MemPoolHandle" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemHandle_t" shortDescription="Handle to Software Bus Memory Pool">
+          <Entry name="MemPoolHandle" type="CFE_ES/CFE_ES_MemHandle" shortDescription="Handle to Software Bus Memory Pool">
             <LongDescription>
               \cfetlmmnemonic  \SB_MEMPOOLHANDLE
             </LongDescription>
@@ -184,7 +184,7 @@
           Used in SB Statistics Telemetry Packet #CFE_SB_StatMsg_t
         </LongDescription>
         <EntryList>
-          <Entry name="PipeId" type="PipeId" shortDescription="Pipe Id associated with the stats below">
+          <Entry name="PipeId" type="CFE_SB_PipeId" shortDescription="Pipe Id associated with the stats below">
             <LongDescription>
               \cfetlmmnemonic  \SB_PDPIPEID
             </LongDescription>
@@ -309,7 +309,7 @@
         </LongDescription>
         <EntryList>
           <Entry name="MsgId" type="MsgId" shortDescription="Message Id portion of the route" />
-          <Entry name="PipeId" type="PipeId" shortDescription="Pipe Id portion of the route" />
+          <Entry name="PipeId" type="CFE_SB_PipeId" shortDescription="Pipe Id portion of the route" />
           <Entry name="State" type="BASE_TYPES/uint8" shortDescription="Route Enabled or Disabled" />
           <Entry name="MsgCnt" type="BASE_TYPES/uint16" shortDescription="Number of msgs with this MsgId sent to this PipeId" />
           <Entry name="AppName" type="BASE_TYPES/ApiName" shortDescription="Pipe Depth Statistics" />
@@ -340,7 +340,7 @@
           <Entry name="SubType" type="BASE_TYPES/uint8" shortDescription="Subscription or Unsubscription" />
           <Entry name="MsgId" type="MsgId" shortDescription="MsgId subscribed or unsubscribe to" />
           <Entry name="Qos" type="MsgQos" shortDescription="Quality of Service, used only for interprocessor communication" />
-          <Entry name="Pipe" type="PipeId" shortDescription="Destination pipe id to send above msg id" />
+          <Entry name="Pipe" type="CFE_SB_PipeId" shortDescription="Destination pipe id to send above msg id" />
         </EntryList>
       </ContainerDataType>
 
@@ -353,7 +353,7 @@
         <EntryList>
           <Entry name="MsgId" type="MsgId" shortDescription="MsgId portion of the subscription" />
           <Entry name="Qos" type="MsgQos" shortDescription="Qos portion of the subscription" />
-          <Entry name="Pipe" type="PipeId" shortDescription="PipeId portion of the subscription" />
+          <Entry name="Pipe" type="CFE_SB_PipeId" shortDescription="PipeId portion of the subscription" />
         </EntryList>
       </ContainerDataType>
 

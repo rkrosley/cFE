@@ -238,7 +238,7 @@
               \cfetlmmnemonic  \TBL_NUMFREESHRBUF
             </LongDescription>
           </Entry>
-          <Entry name="MemPoolHandle" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemHandle_t" shortDescription="Handle to TBL's memory pool">
+          <Entry name="MemPoolHandle" type="CFE_ES/CFE_ES_MemHandle" shortDescription="Handle to TBL's memory pool">
             <LongDescription>
               \cfetlmmnemonic  \TBL_MEMPOOLHANDLE
             </LongDescription>
@@ -283,17 +283,17 @@
               \cfetlmmnemonic  \TBL_CRC
             </LongDescription>
           </Entry>
-          <Entry name="ActiveBufferAddr" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemAddress_t" shortDescription="Address of Active Buffer">
+          <Entry name="ActiveBufferAddr" type="CFE_ES/CFE_ES_MemAddress" shortDescription="Address of Active Buffer">
             <LongDescription>
               \cfetlmmnemonic  \TBL_ACTBUFADD
             </LongDescription>
           </Entry>
-          <Entry name="InactiveBufferAddr" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemAddress_t" shortDescription="Address of Inactive Buffer">
+          <Entry name="InactiveBufferAddr" type="CFE_ES/CFE_ES_MemAddress" shortDescription="Address of Inactive Buffer">
             <LongDescription>
               \cfetlmmnemonic  \TBL_IACTBUFADD
             </LongDescription>
           </Entry>
-          <Entry name="ValidationFuncPtr" type="CFE_ES_EXTERN_TYPEDEFS/CFE_ES_MemAddress_t" shortDescription="Ptr to Owner App's function that validates tbl contents">
+          <Entry name="ValidationFuncPtr" type="CFE_ES/CFE_ES_MemAddress" shortDescription="Ptr to Owner App's function that validates tbl contents">
             <LongDescription>
               \cfetlmmnemonic  \TBL_VALFUNCPTR
             </LongDescription>
