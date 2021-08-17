@@ -207,7 +207,7 @@
 				</Range>
 			</IntegerDataType>
 			
-			<IntegerDataType name="CFE_ES_MemOffset_t">
+			<IntegerDataType name="MemOffset_t">
 				<LongDescription>
 					*
 					* @brief Type used for memory sizes and offsets in commands and telemetry
@@ -318,7 +318,7 @@
                \cfetlmmnemonic  \ES_CODEADDR
             </LongDescription>
           </Entry>
-          <Entry name="CodeSize" type="CFE_ES_MemOffset_t" shortDescription="The Code Size of the Application">
+          <Entry name="CodeSize" type="MemOffset_t" shortDescription="The Code Size of the Application">
             <LongDescription>
                \cfetlmmnemonic  \ES_CODESIZE
             </LongDescription>
@@ -328,7 +328,7 @@
                \cfetlmmnemonic  \ES_DATAADDR
             </LongDescription>
           </Entry>
-          <Entry name="DataSize" type="CFE_ES_MemOffset_t" shortDescription="The Data Size of the Application">
+          <Entry name="DataSize" type="MemOffset_t" shortDescription="The Data Size of the Application">
             <LongDescription>
                \cfetlmmnemonic  \ES_DATASIZE
             </LongDescription>
@@ -338,7 +338,7 @@
                \cfetlmmnemonic  \ES_BSSADDR
             </LongDescription>
           </Entry>
-          <Entry name="BSSSize" type="CFE_ES_MemOffset_t" shortDescription="The BSS Size of the Application">
+          <Entry name="BSSSize" type="MemOffset_t" shortDescription="The BSS Size of the Application">
             <LongDescription>
                \cfetlmmnemonic  \ES_BSSSIZE
             </LongDescription>
@@ -400,7 +400,7 @@
 					<Entry name="TaskName" type="BASE_TYPES/ApiName" shortDescription="*&lt; \brief Task Name"/>
 					<Entry name="AppId" type="CFE_ES_AppId" shortDescription="*&lt; \brief Parent Application ID"/>
 					<Entry name="AppName" type="BASE_TYPES/ApiName" shortDescription="*&lt; \brief Parent Application Name"/>
-					<Entry name="StackSize" type="CFE_ES_MemOffset_t" shortDescription="*&lt; Size of task stack"/>
+					<Entry name="StackSize" type="MemOffset_t" shortDescription="*&lt; Size of task stack"/>
 					<Entry name="Priority" type="TaskPriority" shortDescription="*&lt; Priority of task"/>
 					<PaddingEntry sizeInBits="16" shortDescription="*&lt; Spare bytes for alignment"/>
 				</EntryList>

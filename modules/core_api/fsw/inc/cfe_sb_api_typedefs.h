@@ -39,7 +39,9 @@
 #include "cfe_sb_extern_typedefs.h"
 #include "cfe_msg_api_typedefs.h"
 #include "cfe_resourceid_api_typedefs.h"
+#ifndef CFE_EDS_ENABLED_BUILD
 #include "cfe_msg_hdr.h"
+#endif
 
 /*
 ** Defines
@@ -75,7 +77,7 @@
  *
  * \sa CFE_SB_MsgIdToValue()
  */
-#define CFE_SB_MSGID_UNWRAP_VALUE(mid) ((CFE_SB_MsgId_Atom_t)(mid))
+#define CFE_SB_MSGID_UNWRAP_VALUE(mid) ((CFE_SB_MsgId_t)(mid))
 
 /**
  * \brief Reserved value for CFE_SB_MsgId_t that will not match any valid MsgId

@@ -42,7 +42,8 @@
 
   <Package name="CFE_FS" shortDescription="File Services Configuration">
      <Define name="FILE_CONTENT_ID" value="0x63464531" shortDescription="Magic Number for cFE compliant files (= cFE1)" />
-  </Package>
+		 <Define name="HDR_DESC_MAX_LEN" value="32"/>
+	</Package>
 
   <Package name="CFE_SB" shortDescription="Software Bus Configuration">
      <Define name="SUB_ENTRIES_PER_PKT" value="20" />
@@ -62,7 +63,6 @@
 		<Define name="MAX_PATH_LEN" value="64"/>
 		<Define name="DATA_BYTE_ORDER" value="bigEndian"/>
 		<Define name="SIGNED_INTEGER_ENCODING" value="twosComplement"/>
-		<Define name="CFE_FS_HDR_DESC_MAX_LEN" value="32"/>
 		<Define name="ES_PERF_MAX_IDS" value="128"/>
 		<Define name="ES_POOL_MAX_BUCKETS" value="17"/>
 		<Define name="ES_CDS_MAX_NAME_LENGTH" value="16"/>

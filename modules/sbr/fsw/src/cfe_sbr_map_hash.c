@@ -51,7 +51,7 @@
  * 4 was initially chosen to provide for plenty of holes in the map, while
  * still remaining much smaller than the routing table.  Note the
  * multiple must be a factor of 2 to use the efficient shift logic, and
- * can't be bigger than what can be indexed by CFE_SB_MsgId_Atom_t
+ * can't be bigger than what can be indexed by CFE_SB_MsgId_t
  */
 #define CFE_SBR_MSG_MAP_SIZE (4 * CFE_PLATFORM_SB_MAX_MSG_IDS)
 
@@ -83,12 +83,12 @@ CFE_SBR_RouteId_t CFE_SBR_MSGMAP[CFE_SBR_MSG_MAP_SIZE];
  * Hashes the message id
  *
  * Note: algorithm designed for a 32 bit int, changing the size of
- * CFE_SB_MsgId_Atom_t may require an update to this impelementation
+ * CFE_SB_MsgId_t may require an update to this impelementation
  *
  *-----------------------------------------------------------------*/
-CFE_SB_MsgId_Atom_t CFE_SBR_MsgIdHash(CFE_SB_MsgId_t MsgId)
+CFE_SB_MsgId_t CFE_SBR_MsgIdHash(CFE_SB_MsgId_t MsgId)
 {
-    CFE_SB_MsgId_Atom_t hash;
+    CFE_SB_MsgId_t hash;
 
     hash = CFE_SB_MsgIdToValue(MsgId);
 
@@ -126,7 +126,7 @@ void CFE_SBR_Init_Map(void)
  *-----------------------------------------------------------------*/
 uint32 CFE_SBR_SetRouteId(CFE_SB_MsgId_t MsgId, CFE_SBR_RouteId_t RouteId)
 {
-    CFE_SB_MsgId_Atom_t hash;
+    CFE_SB_MsgId_t hash;
     uint32              collisions = 0;
 
     if (CFE_SB_IsValidMsgId(MsgId))
@@ -160,7 +160,7 @@ uint32 CFE_SBR_SetRouteId(CFE_SB_MsgId_t MsgId, CFE_SBR_RouteId_t RouteId)
  *-----------------------------------------------------------------*/
 CFE_SBR_RouteId_t CFE_SBR_GetRouteId(CFE_SB_MsgId_t MsgId)
 {
-    CFE_SB_MsgId_Atom_t hash;
+    CFE_SB_MsgId_t hash;
     CFE_SBR_RouteId_t   routeid = CFE_SBR_INVALID_ROUTE_ID;
 
     if (CFE_SB_IsValidMsgId(MsgId))

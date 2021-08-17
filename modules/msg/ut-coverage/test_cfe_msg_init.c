@@ -45,7 +45,7 @@ void Test_MSG_Init(void)
 
     CFE_MSG_CommandHeader_t    cmd;
     CFE_MSG_Size_t             size;
-    CFE_SB_MsgId_Atom_t        msgidval_exp;
+    CFE_SB_MsgId_t        msgidval_exp;
     CFE_SB_MsgId_t             msgid_act;
     CFE_MSG_HeaderVersion_t    hdrver;
     CFE_MSG_ApId_t             apid;

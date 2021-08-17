@@ -32,7 +32,9 @@
  */
 #include "common_types.h"
 #include "cfe_error.h"
+#ifndef CFE_EDS_ENABLED_BUILD
 #include "cfe_msg_hdr.h"
+#endif
 #include "cfe_msg_api_typedefs.h"
 
 #include "cfe_es_api_typedefs.h"

@@ -50,7 +50,7 @@
 void Test_MSG_Init_Ext(void)
 {
     CFE_MSG_Message_t    msg;
-    CFE_SB_MsgId_Atom_t  msgidval_exp;
+    CFE_SB_MsgId_t  msgidval_exp;
     CFE_MSG_Subsystem_t  subsys;
     CFE_MSG_EDSVersion_t edsver;
     CFE_MSG_System_t     system;

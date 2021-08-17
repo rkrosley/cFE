@@ -30,7 +30,7 @@
 <PackageFile xmlns="http://www.ccsds.org/schema/sois/seds">
   <Package name="CFE_SB" shortDescription="NASA Core Flight System Software Bus">
     <DataTypeSet>
-      <IntegerDataType name="MsgId" shortDescription="A Software Bus message identifier, used for subscription and routing">
+      <IntegerDataType name="MsgId_t" shortDescription="A Software Bus message identifier, used for subscription and routing">
         <IntegerDataEncoding sizeInBits="${CFE_SB/MSGID_BIT_SIZE}" encoding="unsigned" />
         <Range>
           <MinMaxRange max="2 ^ (${CFE_SB/MSGID_BIT_SIZE})" min="0" rangeType="inclusiveMinExclusiveMax"/>
@@ -94,7 +94,7 @@
           as a MsgId and PipeId combination.
         </LongDescription>
         <EntryList>
-          <Entry name="MsgId" type="MsgId" shortDescription="Message ID of route to be enabled or disabled #CFE_SB_MsgId_t" />
+          <Entry name="MsgId" type="MsgId_t" shortDescription="Message ID of route to be enabled or disabled #CFE_SB_MsgId" />
           <Entry name="Pipe" type="CFE_SB_PipeId" shortDescription="Pipe ID of route to be enabled or disabled #CFE_SB_PipeId_t" />
         </EntryList>
       </ContainerDataType>
@@ -308,7 +308,7 @@
           Structure of one element of the routing information in response to #CFE_SB_SEND_ROUTING_INFO_CC
         </LongDescription>
         <EntryList>
-          <Entry name="MsgId" type="MsgId" shortDescription="Message Id portion of the route" />
+          <Entry name="MsgId" type="MsgId_t" shortDescription="Message Id portion of the route" />
           <Entry name="PipeId" type="CFE_SB_PipeId" shortDescription="Pipe Id portion of the route" />
           <Entry name="State" type="BASE_TYPES/uint8" shortDescription="Route Enabled or Disabled" />
           <Entry name="MsgCnt" type="BASE_TYPES/uint16" shortDescription="Number of msgs with this MsgId sent to this PipeId" />
@@ -322,7 +322,7 @@
           Structure of one element of the map information in response to #CFE_SB_SEND_MAP_INFO_CC
         </LongDescription>
         <EntryList>
-          <Entry name="MsgId" type="MsgId" shortDescription="Message Id which has been subscribed to" />
+          <Entry name="MsgId" type="MsgId_t" shortDescription="Message Id which has been subscribed to" />
           <Entry name="Index" type="MsgRouteIdx" shortDescription="Routing table index where pipe destinations are found" />
         </EntryList>
       </ContainerDataType>
@@ -338,7 +338,7 @@
         </LongDescription>
         <EntryList>
           <Entry name="SubType" type="BASE_TYPES/uint8" shortDescription="Subscription or Unsubscription" />
-          <Entry name="MsgId" type="MsgId" shortDescription="MsgId subscribed or unsubscribe to" />
+          <Entry name="MsgId" type="MsgId_t" shortDescription="MsgId subscribed or unsubscribe to" />
           <Entry name="Qos" type="MsgQos" shortDescription="Quality of Service, used only for interprocessor communication" />
           <Entry name="Pipe" type="CFE_SB_PipeId" shortDescription="Destination pipe id to send above msg id" />
         </EntryList>
@@ -351,7 +351,7 @@
           Used in structure definition #CFE_SB_PrevSubMsg_t
         </LongDescription>
         <EntryList>
-          <Entry name="MsgId" type="MsgId" shortDescription="MsgId portion of the subscription" />
+          <Entry name="MsgId" type="MsgId_t" shortDescription="MsgId portion of the subscription" />
           <Entry name="Qos" type="MsgQos" shortDescription="Qos portion of the subscription" />
           <Entry name="Pipe" type="CFE_SB_PipeId" shortDescription="PipeId portion of the subscription" />
         </EntryList>
@@ -902,7 +902,7 @@
            only the specified MsgId passes through on the receive side.
         </LongDescription>
         <ParameterSet>
-          <Parameter name="MsgId" type="MsgId" />
+          <Parameter name="MsgId" type="MsgId_t" />
         </ParameterSet>
         <CommandSet>
           <Command name="send">

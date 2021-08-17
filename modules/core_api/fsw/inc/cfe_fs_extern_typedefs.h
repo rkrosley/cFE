@@ -33,6 +33,7 @@
 
 /* Use the EDS generated version of these types */
 #include "cfe_fs_eds_typedefs.h"
+#include "cfe_fs_eds_designparameters.h"
 
 #else
 /* Use the local definitions of these types */

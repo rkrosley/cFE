@@ -266,7 +266,7 @@ CFE_Status_t CFE_SB_GetPipeIdByName(CFE_SB_PipeId_t *PipeIdPtr, const char *Pipe
 **
 ** \sa #CFE_SB_Subscribe, #CFE_SB_SubscribeLocal, #CFE_SB_Unsubscribe, #CFE_SB_UnsubscribeLocal
 **/
-CFE_Status_t CFE_SB_SubscribeEx(CFE_SB_MsgId_t MsgId, CFE_SB_PipeId_t PipeId, CFE_SB_Qos_t Quality, uint16 MsgLim);
+CFE_Status_t CFE_SB_SubscribeEx(CFE_SB_MsgId_t MsgId, CFE_SB_PipeId_t PipeId, CFE_SB_MsgQos_t Quality, uint16 MsgLim);
 
 /*****************************************************************************/
 /**
@@ -799,7 +799,7 @@ static inline bool CFE_SB_MsgId_Equal(CFE_SB_MsgId_t MsgId1, CFE_SB_MsgId_t MsgI
  *
  * \return Integer representation of the #CFE_SB_MsgId_t
  */
-static inline CFE_SB_MsgId_Atom_t CFE_SB_MsgIdToValue(CFE_SB_MsgId_t MsgId)
+static inline CFE_SB_MsgId_t CFE_SB_MsgIdToValue(CFE_SB_MsgId_t MsgId)
 {
     return CFE_SB_MSGID_UNWRAP_VALUE(MsgId);
 }
@@ -828,7 +828,7 @@ static inline CFE_SB_MsgId_Atom_t CFE_SB_MsgIdToValue(CFE_SB_MsgId_t MsgId)
  *
  * \return #CFE_SB_MsgId_t representation of the integer
  */
-static inline CFE_SB_MsgId_t CFE_SB_ValueToMsgId(CFE_SB_MsgId_Atom_t MsgIdValue)
+static inline CFE_SB_MsgId_t CFE_SB_ValueToMsgId(CFE_SB_MsgId_t MsgIdValue)
 {
     CFE_SB_MsgId_t Result = CFE_SB_MSGID_WRAP_VALUE(MsgIdValue);
     return Result;

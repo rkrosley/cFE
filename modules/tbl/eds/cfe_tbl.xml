@@ -271,7 +271,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="CFE_TBL_TblReg_packet_Payload_t" shortDescription="Table Registry Info Packet">
+      <ContainerDataType name="TblReg_packet_Payload" shortDescription="Table Registry Info Packet">
         <EntryList>
           <Entry name="Size" type="BASE_TYPES/uint32" shortDescription="Size, in bytes, of Table">
             <LongDescription>
@@ -370,7 +370,7 @@
 
       <ContainerDataType name="TableRegistryTlm" baseType="CCSDS/TelemetryPacket">
         <EntryList>
-          <Entry type="CFE_TBL_TblReg_packet_Payload_t" name="Payload" />
+          <Entry type="TblReg_packet_Payload" name="Payload" />
         </EntryList>
       </ContainerDataType>
 
