@@ -118,7 +118,7 @@
         </EnumerationList>
       </EnumeratedDataType>
 			
-			<SubRangeDataType name="CFE_ES_AppId" baseType="CFE_RESOURCEID/CFE_RESOURCEID_BASE_TYPE">
+			<SubRangeDataType name="CFE_ES_AppId" baseType="CFE/RESOURCEID_BASE_TYPE">
 				<LongDescription>
 					*
 					* @brief A type for Application IDs
@@ -130,7 +130,7 @@
 				</Range>
 			</SubRangeDataType>
 			
-			<SubRangeDataType name="CFE_ES_TaskId" baseType="CFE_RESOURCEID/CFE_RESOURCEID_BASE_TYPE">
+			<SubRangeDataType name="CFE_ES_TaskId" baseType="CFE/RESOURCEID_BASE_TYPE">
 				<LongDescription>
 					*
 					* @brief A type for Task IDs
@@ -142,7 +142,7 @@
 				</Range>
 			</SubRangeDataType>
 			
-			<SubRangeDataType name="CFE_ES_LibId" baseType="CFE_RESOURCEID/CFE_RESOURCEID_BASE_TYPE">
+			<SubRangeDataType name="CFE_ES_LibId" baseType="CFE/RESOURCEID_BASE_TYPE">
 				<LongDescription>
 					*
 					* @brief A type for Library IDs
@@ -154,7 +154,7 @@
 				</Range>
 			</SubRangeDataType>
 			
-			<SubRangeDataType name="CFE_ES_CounterId" baseType="CFE_RESOURCEID/CFE_RESOURCEID_BASE_TYPE">
+			<SubRangeDataType name="CFE_ES_CounterId" baseType="CFE/RESOURCEID_BASE_TYPE">
 				<LongDescription>
 					*
 					* @brief A type for Counter IDs
@@ -166,7 +166,7 @@
 				</Range>
 			</SubRangeDataType>
 			
-			<SubRangeDataType name="CFE_ES_MemHandle" baseType="CFE_RESOURCEID/CFE_RESOURCEID_BASE_TYPE">
+			<SubRangeDataType name="CFE_ES_MemHandle" baseType="CFE/RESOURCEID_BASE_TYPE">
 				<LongDescription>
 					*
 					* @brief Memory Handle type
@@ -179,7 +179,7 @@
 				</Range>
 			</SubRangeDataType>
 			
-			<SubRangeDataType name="CFE_ES_CDSHandle" baseType="CFE_RESOURCEID/CFE_RESOURCEID_BASE_TYPE">
+			<SubRangeDataType name="CFE_ES_CDSHandle" baseType="CFE/RESOURCEID_BASE_TYPE">
 				<LongDescription>
 					*
 					* @brief CDS Handle type

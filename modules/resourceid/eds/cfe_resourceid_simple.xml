@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <PackageFile xmlns="http://www.ccsds.org/schema/sois/seds">
-	<Package name="CFE_RESOURCEID">
+	<Package name="CFE">
 		<DataTypeSet>
-			<IntegerDataType name="CFE_ResourceId_t">
+			<IntegerDataType name="ResourceId_t">
 				<LongDescription>
 					*
 					* @brief A type that provides a common, abstract identifier for
@@ -16,7 +16,8 @@
 					<MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="4294967295"/>
 				</Range>
 			</IntegerDataType>
-			<SubRangeDataType name="CFE_RESOURCEID_BASE_TYPE" baseType="CFE_ResourceId_t">
+			<Define name="RESOURCEID_BASE_TYPE" value="CFE_ResourceId_t"/>
+			<SubRangeDataType name="RESOURCEID_BASE_TYPE" baseType="ResourceId_t">
 				<LongDescription>
 					*
 					* @brief A macro providing a type for app-specific IDs

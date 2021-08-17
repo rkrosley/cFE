@@ -29,6 +29,7 @@
 
 #include "common_types.h"
 
+#ifndef CFE_EDS_ENABLED_BUILD
 /**
  * @brief A type that provides a common, abstract identifier for
  * all ES managed resources (e.g. apps, tasks, counters, etc).
@@ -45,6 +46,7 @@ typedef uint32 CFE_ResourceId_t;
  * this means all ID values can be interchanged.
  */
 #define CFE_RESOURCEID_BASE_TYPE CFE_ResourceId_t
+#endif
 
 /**
  * @brief A fixed bit that will be set in all CFE resource ID values

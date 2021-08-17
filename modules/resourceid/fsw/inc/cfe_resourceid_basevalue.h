@@ -44,6 +44,9 @@
 /*
 ** Include Files
 */
+#ifdef CFE_EDS_ENABLED_BUILD
+#include "cfe_resourceid_simple_eds_typedefs.h"
+#endif
 #include "cfe_resourceid_typedef.h"
 
 /*

@@ -37,7 +37,7 @@
         </Range>
       </IntegerDataType>
 
-      <SubRangeDataType name="CFE_SB_PipeId" baseType="CFE_RESOURCEID/CFE_RESOURCEID_BASE_TYPE"
+      <SubRangeDataType name="CFE_SB_PipeId" baseType="CFE/RESOURCEID_BASE_TYPE"
 												shortDescription="A Software Bus pipe identifier">
         <Range>
 					<MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="4294967295"/>

@@ -48,7 +48,7 @@
  * These are based on historically supported definitions and not
  * an open source standard.
  */
-
+#ifndef CFE_EDS_ENABLED_BUILD
 /**
  * \brief Full CCSDS header
  */
@@ -56,6 +56,7 @@ typedef struct
 {
     CCSDS_PrimaryHeader_t Pri; /**< \brief CCSDS Primary Header */
 } CCSDS_SpacePacket_t;
+#endif
 
 /**
  * \brief cFS generic base message
@@ -67,7 +68,7 @@ union CFE_MSG_Message
     CCSDS_SpacePacket_t CCSDS;                             /**< \brief CCSDS Header (Pri or Pri + Ext) */
     uint8               Byte[sizeof(CCSDS_SpacePacket_t)]; /**< \brief Byte level access */
 };
-
+#ifndef CFE_EDS_ENABLED_BUILD
 /**
  * \brief cFS command header
  *
@@ -91,5 +92,5 @@ struct CFE_MSG_TelemetryHeader
     uint8                              Spare[4]; /**< \brief Pad to avoid compiler padding if payload
                                                              requires 64 bit alignment */
 };
-
+#endif /* CFE_EDS_ENABLED_BUILD */
 #endif /* DEFAULT_CFE_MSG_HDR_PRI_H */

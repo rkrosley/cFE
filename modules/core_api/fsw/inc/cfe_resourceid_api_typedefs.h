@@ -45,6 +45,9 @@
  * This is provided via the external resourceid library
  * and may be customized by the user/mission preferences.
  */
+#ifdef CFE_EDS_ENABLED_BUILD
+#include "cfe_resourceid_simple_eds_typedefs.h"
+#endif
 #include "cfe_resourceid_typedef.h"
 
 /*
