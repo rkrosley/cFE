@@ -460,7 +460,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="CommandBase" baseType="CCSDS/CommandPacket">
+      <ContainerDataType name="CommandBase" baseType="CFE_MSG/CommandHeader">
       </ContainerDataType>
 
       <ContainerDataType name="Noop" baseType="CommandBase">
@@ -1241,19 +1241,19 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="HousekeepingTlm" baseType="CCSDS/TelemetryPacket">
+      <ContainerDataType name="HousekeepingTlm" baseType="CFE_MSG/TelemetryHeader">
         <EntryList>
           <Entry type="HousekeepingTlm_Payload" name="Payload" />
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="DiagnosticTlm" baseType="CCSDS/TelemetryPacket">
+      <ContainerDataType name="DiagnosticTlm" baseType="CFE_MSG/TelemetryHeader">
         <EntryList>
           <Entry type="DiagnosticTlm_Payload" name="Payload" />
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="ToneDataCmd" baseType="CCSDS/CommandPacket">
+      <ContainerDataType name="ToneDataCmd" baseType="CFE_MSG/CommandHeader">
         <EntryList>
           <Entry type="ToneDataCmd_Payload" name="Payload" />
         </EntryList>
@@ -1274,7 +1274,7 @@
           <Interface name="SEND_HK" shortDescription="Send telemetry command interface" type="CFE_SB/Telecommand">
             <!-- This uses a bare spacepacket with no payload -->
             <GenericTypeMapSet>
-              <GenericTypeMap name="TelecommandDataType" type="CCSDS/CommandPacket" />
+              <GenericTypeMap name="TelecommandDataType" type="CFE_MSG/CommandHeader" />
             </GenericTypeMapSet>
           </Interface>
           <Interface name="HK_TLM" shortDescription="Software bus housekeeping telemetry interface" type="CFE_SB/Telemetry">
@@ -1285,12 +1285,12 @@
           </Interface>
           <Interface name="TONE_CMD" type="CFE_SB/Telecommand">
             <GenericTypeMapSet>
-              <GenericTypeMap name="TelecommandDataType" type="CCSDS/CommandPacket" />
+              <GenericTypeMap name="TelecommandDataType" type="CFE_MSG/CommandHeader" />
             </GenericTypeMapSet>
           </Interface>
           <Interface name="ONEHZ_CMD" type="CFE_SB/Telecommand">
             <GenericTypeMapSet>
-              <GenericTypeMap name="TelecommandDataType" type="CCSDS/CommandPacket" />
+              <GenericTypeMap name="TelecommandDataType" type="CFE_MSG/CommandHeader" />
             </GenericTypeMapSet>
           </Interface>
           <Interface name="DATA_CMD" type="CFE_SB/Telecommand">
@@ -1300,7 +1300,7 @@
           </Interface>
           <Interface name="SEND_CMD" type="CFE_SB/Telecommand">
             <GenericTypeMapSet>
-              <GenericTypeMap name="TelecommandDataType" type="CCSDS/CommandPacket" />
+              <GenericTypeMap name="TelecommandDataType" type="CFE_MSG/CommandHeader" />
             </GenericTypeMapSet>
           </Interface>
           <Interface name="DIAG_TLM" type="CFE_SB/Telemetry">

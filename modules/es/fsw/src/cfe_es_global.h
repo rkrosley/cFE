@@ -40,7 +40,9 @@
 
 /* This header may be generated from an EDS file,
  * tools are available and the feature is enabled */
-#ifndef CFE_EDS_ENABLED_BUILD
+#ifdef CFE_EDS_ENABLED_BUILD
+#include "cfe_es_extern_typedefs.h"
+#else
 #include "cfe_es_msg.h"
 #endif /* CFE_EDS_ENABLED_BUILD */
 

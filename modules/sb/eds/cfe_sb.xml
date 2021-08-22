@@ -379,32 +379,32 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="CommandBase" baseType="CCSDS/CommandPacket">
+      <ContainerDataType name="CommandBase" baseType="CFE_MSG/CommandHeader">
         <!--
         This container has no entries of its own, it just serves as a common base type for all command messages.
         Defined command messages must all use this container as a base type.
         -->
       </ContainerDataType>
 
-      <ContainerDataType name="HousekeepingTlm" baseType="CCSDS/TelemetryPacket">
+      <ContainerDataType name="HousekeepingTlm" baseType="CFE_MSG/TelemetryHeader">
         <EntryList>
           <Entry type="HousekeepingTlm_Payload" name="Payload" />
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="StatsTlm" baseType="CCSDS/TelemetryPacket">
+      <ContainerDataType name="StatsTlm" baseType="CFE_MSG/TelemetryHeader">
         <EntryList>
           <Entry type="StatsTlm_Payload" name="Payload" />
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="AllSubscriptionsTlm" baseType="CCSDS/TelemetryPacket">
+      <ContainerDataType name="AllSubscriptionsTlm" baseType="CFE_MSG/TelemetryHeader">
         <EntryList>
           <Entry type="AllSubscriptionsTlm_Payload" name="Payload" />
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="SingleSubscriptionTlm" baseType="CCSDS/TelemetryPacket">
+      <ContainerDataType name="SingleSubscriptionTlm" baseType="CFE_MSG/TelemetryHeader">
         <EntryList>
           <Entry type="SingleSubscriptionTlm_Payload" name="Payload" />
         </EntryList>
@@ -930,7 +930,7 @@
             the software bus.  This is typically the various types of telemetry that the application generates.
         </LongDescription>
         <GenericTypeSet>
-          <GenericType name="TelemetryDataType" baseType="CCSDS/TelemetryPacket" />
+          <GenericType name="TelemetryDataType" baseType="CFE_MSG/TelemetryHeader" />
         </GenericTypeSet>
         <ParameterSet>
           <Parameter name="InstanceNumber" type="BASE_TYPES/uint16" shortDescription="Identifies a specific instance of this topic within the mission" />
@@ -958,7 +958,7 @@
             This is a receive-only interface; the Telemetry interface provides the equivalent send function.
         </LongDescription>
         <GenericTypeSet>
-          <GenericType name="TelecommandDataType" baseType="CCSDS/CommandPacket" />
+          <GenericType name="TelecommandDataType" baseType="CFE_MSG/CommandHeader" />
         </GenericTypeSet>
         <ParameterSet>
           <Parameter name="InstanceNumber" type="BASE_TYPES/uint16" shortDescription="Identifies a specific instance of this topic within the mission" />
@@ -1023,7 +1023,7 @@
           <Interface name="SEND_HK" shortDescription="Send telemetry command interface" type="CFE_SB/Telecommand">
             <!-- This uses a bare spacepacket with no payload -->
             <GenericTypeMapSet>
-              <GenericTypeMap name="TelecommandDataType" type="CCSDS/CommandPacket" />
+              <GenericTypeMap name="TelecommandDataType" type="CFE_MSG/CommandHeader" />
             </GenericTypeMapSet>
           </Interface>
           <Interface name="HK_TLM" shortDescription="Software bus housekeeping telemetry interface" type="CFE_SB/Telemetry">

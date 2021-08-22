@@ -207,25 +207,7 @@
          </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType baseType="SpacePacket" name="CommandPacket" shortDescription="Complete Command Packet Header">
-         <ConstraintSet>
-           <ValueConstraint entry="Hdr.SecHdrFlags" value="3" />
-         </ConstraintSet>
-         <EntryList>
-            <Entry name="Sec" type="CmdSecHdr" shortDescription="Command Secondary Header" />
-         </EntryList>
-      </ContainerDataType>
-
-      <ContainerDataType baseType="SpacePacket" name="TelemetryPacket" shortDescription="Complete Telemetry Packet Header">
-         <ConstraintSet>
-           <ValueConstraint entry="Hdr.SecHdrFlags" value="1" />
-         </ConstraintSet>
-         <EntryList>
-            <Entry name="Sec" type="TlmSecHdr" shortDescription="Telemetry Secondary Header" />
-         </EntryList>
-      </ContainerDataType>
-
-      <ContainerDataType name="PacketContainer" shortDescription="A buffer capable of storing any Space Packet" >
+		 <ContainerDataType name="PacketContainer" shortDescription="A buffer capable of storing any Space Packet" >
          <EntryList>
             <Entry name="Data" type="SpacePacket" shortDescription="Packet Content" />
          </EntryList>

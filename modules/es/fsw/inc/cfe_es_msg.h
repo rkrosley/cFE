@@ -35,12 +35,14 @@
 #ifndef CFE_ES_MSG_H
 #define CFE_ES_MSG_H
 
+#ifndef CFE_EDS_ENABLED_BUILD
 /*
 ** Includes
 */
 #include "common_types.h" /* Basic data types */
 #include "cfe_msg_hdr.h"  /* for header definitions */
 #include "cfe_es_extern_typedefs.h"
+#endif /* CFE_EDS_ENABLED_BUILD */
 
 /*
 ** ES task command packet command codes
@@ -1044,7 +1046,7 @@
 #define CFE_ES_QUERY_ALL_TASKS_CC 24
 
 /** \} */
-
+#ifndef CFE_EDS_ENABLED_BUILD
 /*************************************************************************/
 /********************************/
 /* Command Message Data Formats */
@@ -1553,5 +1555,5 @@ typedef struct CFE_ES_HousekeepingTlm
     CFE_ES_HousekeepingTlm_Payload_t Payload;   /**< \brief Telemetry payload */
 
 } CFE_ES_HousekeepingTlm_t;
-
+#endif /* CFE_EDS_ENABLED_BUILD */
 #endif /* CFE_ES_MSG_H */

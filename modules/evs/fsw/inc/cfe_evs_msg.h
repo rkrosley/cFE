@@ -36,11 +36,13 @@
 #ifndef CFE_EVS_MSG_H
 #define CFE_EVS_MSG_H
 
+#ifndef CFE_EDS_ENABLED_BUILD
 /********************************** Include Files  ************************************/
 #include "common_types.h"            /* Basic data types */
 #include "cfe_msg_hdr.h"             /* for header definitions */
 #include "cfe_evs_extern_typedefs.h" /* for EVS-specific types such as CFE_EVS_LogMode_Enum_t */
 #include "cfe_es_extern_typedefs.h"  /* for CFE_ES_AppId_t type */
+#endif /* CFE_EDS_ENABLED_BUILD */
 
 /** \name Event Services Command Codes */
 /** \{ */
@@ -899,6 +901,7 @@
 #define CFE_EVS_PORT3_BIT 0x0004
 #define CFE_EVS_PORT4_BIT 0x0008
 
+#ifndef CFE_EDS_ENABLED_BUILD
 /******************  Structure Definitions *********************/
 
 /**
@@ -1272,4 +1275,5 @@ typedef struct CFE_EVS_ShortEventTlm
 
 } CFE_EVS_ShortEventTlm_t;
 
+#endif /* CFE_EDS_ENABLED_BUILD */
 #endif /* CFE_EVS_MSG_H */

@@ -390,6 +390,8 @@ typedef uint16 CFE_ES_TaskPriority_Atom_t;
  */
 typedef uint32 CFE_ES_MemOffset_t;
 
+#endif /* CFE_EDS_ENABLED_BUILD */
+
 /*
  * A converter macro to use when initializing an CFE_ES_MemOffset_t
  * from an integer value of a different type.
@@ -426,6 +428,8 @@ typedef uint32 CFE_ES_MemAddress_t;
  * value is no longer usable as a memory address after this.
  */
 #define CFE_ES_MEMADDRESS_C(x) ((CFE_ES_MemAddress_t)((cpuaddr)(x)&0xFFFFFFFF))
+
+#ifndef CFE_EDS_ENABLED_BUILD
 
 /*
  * Data Sructures shared between API and Message (CMD/TLM) interfaces

@@ -302,28 +302,31 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="CommandBase" baseType="CCSDS/CommandPacket" shortDescription="Base type for all Event Services commands">
+      <ContainerDataType name="CommandBase" baseType="CFE_MSG/CommandHeader" shortDescription="Base type for all Event Services commands">
       </ContainerDataType>
 
-      <ContainerDataType name="HousekeepingTlm" baseType="CCSDS/TelemetryPacket" shortDescription="Event Services Housekeeping Telemetry">
+      <ContainerDataType name="HousekeepingTlm" shortDescription="Event Services Housekeeping Telemetry">
         <EntryList>
+					<Entry type="CFE_MSG/TelemetryHeader" name="TlmHeader"/>
           <Entry type="HousekeepingTlm_Payload" name="Payload" />
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="LongEventTlm" baseType="CCSDS/TelemetryPacket" shortDescription="Event Services Event Message">
+      <ContainerDataType name="LongEventTlm" shortDescription="Event Services Event Message">
         <EntryList>
-          <Entry type="LongEventTlm_Payload" name="Payload" />
+					<Entry type="CFE_MSG/TelemetryHeader" name="TlmHeader"/>
+					<Entry type="LongEventTlm_Payload" name="Payload" />
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="ShortEventTlm" baseType="CCSDS/TelemetryPacket" shortDescription="Event Services Event Message">
+      <ContainerDataType name="ShortEventTlm" shortDescription="Event Services Event Message">
         <EntryList>
-          <Entry type="ShortEventTlm_Payload" name="Payload" />
+					<Entry type="CFE_MSG/TelemetryHeader" name="TlmHeader"/>
+					<Entry type="ShortEventTlm_Payload" name="Payload" />
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="Noop" baseType="CommandBase">
+      <ContainerDataType name="NoopCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Event Services No-Op
 
@@ -355,7 +358,7 @@
         </ConstraintSet>
       </ContainerDataType>
 
-      <ContainerDataType name="ResetCounters" baseType="CommandBase">
+      <ContainerDataType name="ResetCountersCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Event Services Reset Counters
 
@@ -396,7 +399,7 @@
         </ConstraintSet>
       </ContainerDataType>
 
-      <ContainerDataType name="EnableEventType" baseType="CommandBase">
+      <ContainerDataType name="EnableEventTypeCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Enable Event Type
 
@@ -449,7 +452,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="DisableEventType" baseType="CommandBase">
+      <ContainerDataType name="DisableEventTypeCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Disable Event Type
 
@@ -503,7 +506,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="SetEventFormatMode" baseType="CommandBase">
+      <ContainerDataType name="SetEventFormatModeCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Set Event Format Mode
 
@@ -556,7 +559,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="EnableAppEventType" baseType="CommandBase">
+      <ContainerDataType name="EnableAppEventTypeCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Enable Application Event Type
 
@@ -613,7 +616,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="DisableAppEventType" baseType="CommandBase">
+      <ContainerDataType name="DisableAppEventTypeCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Disable Application Event Type
 
@@ -670,7 +673,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="EnableAppEvents" baseType="CommandBase">
+      <ContainerDataType name="EnableAppEventsCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Enable Event Services for an Application
 
@@ -717,7 +720,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="DisableAppEvents" baseType="CommandBase">
+      <ContainerDataType name="DisableAppEventsCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Disable Event Services for an Application
 
@@ -764,7 +767,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="ResetAppCounter" baseType="CommandBase">
+      <ContainerDataType name="ResetAppCounterCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Reset Application Event Counters
 
@@ -807,7 +810,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="SetFilter" baseType="CommandBase">
+      <ContainerDataType name="SetFilterCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Set Application Event Filter
 
@@ -854,7 +857,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="EnablePorts" baseType="CommandBase">
+      <ContainerDataType name="EnablePortsCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Enable Event Services Output Ports
 
@@ -899,7 +902,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="DisablePorts" baseType="CommandBase">
+      <ContainerDataType name="DisablePortsCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Disable Event Services Output Ports
 
@@ -945,7 +948,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="ResetFilter" baseType="CommandBase">
+      <ContainerDataType name="ResetFilterCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Reset an Event Filter for an Application
 
@@ -986,7 +989,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="ResetAllFilters" baseType="CommandBase">
+      <ContainerDataType name="ResetAllFiltersCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Reset All Event Filters for an Application
 
@@ -1028,7 +1031,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="AddEventFilter" baseType="CommandBase">
+      <ContainerDataType name="AddEventFilterCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Add Application Event Filter
 
@@ -1070,7 +1073,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="DeleteEventFilter" baseType="CommandBase">
+      <ContainerDataType name="DeleteEventFilterCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Delete Application Event Filter
 
@@ -1112,7 +1115,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="WriteAppDataFile" baseType="CommandBase">
+      <ContainerDataType name="WriteAppDataFileCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Write Event Services Application Information to File
 
@@ -1154,7 +1157,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="WriteLogDataFile" baseType="CommandBase">
+      <ContainerDataType name="WriteLogDataFileCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Write Event Log to File
 
@@ -1194,7 +1197,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="SetLogMode" baseType="CommandBase">
+      <ContainerDataType name="SetLogModeCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Set Logging Mode
 
@@ -1236,7 +1239,7 @@
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="ClearLog" baseType="CommandBase">
+      <ContainerDataType name="ClearLogCmd" baseType="CommandBase">
         <LongDescription>
           \cfeevscmd  Clear Event Log
 
@@ -1288,7 +1291,7 @@
           <Interface name="SEND_HK" shortDescription="Send telemetry command interface" type="CFE_SB/Telecommand">
             <!-- This uses a bare spacepacket with no payload -->
             <GenericTypeMapSet>
-              <GenericTypeMap name="TelecommandDataType" type="CCSDS/CommandPacket" />
+              <GenericTypeMap name="TelecommandDataType" type="CFE_MSG/CommandHeader" />
             </GenericTypeMapSet>
           </Interface>
           <Interface name="HK_TLM" shortDescription="Software bus housekeeping telemetry interface" type="CFE_SB/Telemetry">

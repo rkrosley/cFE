@@ -850,32 +850,35 @@
       </ContainerDataType>
 -->
 
-      <ContainerDataType name="CommandBase" baseType="CCSDS/CommandPacket">
+      <ContainerDataType name="CommandBase" baseType="CFE_MSG/CommandHeader">
       </ContainerDataType>
 
-      <ContainerDataType name="HousekeepingTlm" baseType="CCSDS/TelemetryPacket">
+      <ContainerDataType name="HousekeepingTlm">
         <EntryList>
+					<Entry type="CFE_MSG/TelemetryHeader" name="TlmHeader"/>
           <Entry type="HousekeepingTlm_Payload" name="Payload" />
         </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="OneAppTlm" baseType="CCSDS/TelemetryPacket">
+      <ContainerDataType name="OneAppTlm">
         <EntryList>
-          <Entry type="OneAppTlm_Payload" name="Payload" />
+					<Entry type="CFE_MSG/TelemetryHeader" name="TlmHeader"/>
+					<Entry type="OneAppTlm_Payload" name="Payload" />
         </EntryList>
       </ContainerDataType>
 
 <!-- This appears to be obsolete.
-      <ContainerDataType name="ShellTlm" baseType="CCSDS/TelemetryPacket">
+      <ContainerDataType name="ShellTlm" baseType="CCSDS/TelemetryHeader">
         <EntryList>
           <Entry type="ShellPacket_Payload" name="Payload" />
         </EntryList>
       </ContainerDataType>
 -->
 
-      <ContainerDataType name="MemStatsTlm" baseType="CCSDS/TelemetryPacket">
+      <ContainerDataType name="MemStatsTlm">
         <EntryList>
-          <Entry type="PoolStatsTlm_Payload" name="Payload" />
+					<Entry type="CFE_MSG/TelemetryHeader" name="TlmHeader"/>
+					<Entry type="PoolStatsTlm_Payload" name="Payload" />
         </EntryList>
       </ContainerDataType>
 
@@ -2185,6 +2188,35 @@
         </EntryList>
       </ContainerDataType>
 
+			<ContainerDataType name="CDSRegDumpRec_t">
+				<LongDescription>
+					*
+					* \brief CDS Register Dump Record
+					*
+					* Structure that is used to provide information about a critical data store.
+					* It is primarily used for the Dump CDS registry (#CFE_ES_DUMP_CDS_REGISTRY_CC)
+					* command.
+					*
+					* \note There is not currently a telemetry message directly containing this
+					* data structure, but it does define the format of the data file generated
+					* by the Dump CDS registry command.  Therefore it should be considered
+					* part of the overall telemetry interface.
+				</LongDescription>
+				<EntryList>
+					<Entry name="Handle" type="CFE_ES_CDSHandle" shortDescription="*&lt; \brief Handle of CDS"/>
+					<Entry name="Size" type="MemOffset_t" shortDescription="*&lt; \brief Size, in bytes, of the CDS memory block"/>
+					<Entry name="Table" type="BASE_TYPES/StatusBit"
+								 shortDescription="*&lt; \brief Flag that indicates whether CDS contains a Critical Table"/>
+				  <Entry name="Name" type="BASE_TYPES/CDSName" shortDescription="*&lt; \brief Processor Unique Name of CDS"/>
+				  <Entry name="ByteAlignSpare" type="BASE_TYPES/uint8"
+								 shortDescription="*&lt; \brief Spare bytes to ensure structure size is multiple of 4 bytes">
+						<ArrayDimensions>
+							<Dimension size="3"/>
+						</ArrayDimensions>
+					</Entry>
+				</EntryList>
+			</ContainerDataType>
+
     </DataTypeSet>
 
     <ComponentSet>
@@ -2198,7 +2230,7 @@
           <Interface name="SEND_HK" shortDescription="Send telemetry command interface" type="CFE_SB/Telecommand">
             <!-- This uses a bare spacepacket with no payload -->
             <GenericTypeMapSet>
-              <GenericTypeMap name="TelecommandDataType" type="CCSDS/CommandPacket" />
+              <GenericTypeMap name="TelecommandDataType" type="CFE_MSG/CommandHeader" />
             </GenericTypeMapSet>
           </Interface>
           <Interface name="HK_TLM" shortDescription="Software bus housekeeping telemetry interface" type="CFE_SB/Telemetry">

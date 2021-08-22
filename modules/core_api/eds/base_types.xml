@@ -86,7 +86,7 @@
         </Range>
       </IntegerDataType>
 
-      <!-- Floating point types -->
+		 <!-- Floating point types -->
       <FloatDataType name="float" shortDescription="Single precision (32 bit) floating point value">
         <FloatDataEncoding encodingAndPrecision="IEEE754_2008_single" byteOrder="${CFE_MISSION/DATA_BYTE_ORDER}" sizeInBits="32" />
         <Range>
@@ -103,6 +103,7 @@
       <!-- Commonly used string types in all CFE/CFS messages -->
       <StringDataType name="ApiName" length="${CFE_MISSION/MAX_API_LEN}" />
       <StringDataType name="PathName" length="${CFE_MISSION/MAX_PATH_LEN}" />
+		  <StringDataType name="CDSName" length="${CFE_MISSION/ES_CDS_MAX_FULL_NAME_LEN}"/>
 
       <!--
         The following data types are a test/example of how 20-bit microseconds

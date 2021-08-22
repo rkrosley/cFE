@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    GSC-18128-1, "Core Flight Executive Version 6.7"
+
+    Copyright (c) 2006-2019 United States Government as represented by
+    the Administrator of the National Aeronautics and Space Administration.
+    All Rights Reserved.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+    This document adheres to the Electronic Data Sheet (EDS) XML schema
+    as prescribed in CCSDS book 876.0.
+
+    Purpose:
+      This describes usage of objects as defined by CCSDS book 133 Space Packet Protocol,
+      as utilized by the Core Fligh System (cFS)
+
+-->
+<PackageFile xmlns="http://www.ccsds.org/schema/sois/seds">
+<Package name="CFE_MSG" shortDescription="CCSDS Space Packet Protocol usage in cFS">
+
+   <DataTypeSet>
+		 
+		 <ContainerDataType name="Message_t">
+			 <EntryList>
+				 <Entry name="Hdr" type="CCSDS/${CCSDS_SPACEPACKET/HEADER_TYPE}" shortDescription="Primary Header" />
+			 </EntryList>
+		 </ContainerDataType>
+
+		 <!--<ContainerDataType name="Message_t" baseType="CCSDS/SpacePacket" buffer="subclassUnion"/>-->
+
+		 <ContainerDataType name="CommandHeader" shortDescription="Complete Command Packet Header">
+			 <ConstraintSet>
+				 <ValueConstraint entry="Msg.Hdr.SecHdrFlags" value="3" />
+			 </ConstraintSet>
+			 <EntryList>
+				 <Entry name="Msg" type="Message_t"/>
+				 <Entry name="Sec" type="CCSDS/CmdSecHdr" shortDescription="Command Secondary Header" />
+			 </EntryList>
+		 </ContainerDataType>
+
+		 <ContainerDataType name="TelemetryHeader" shortDescription="Complete Telemetry Packet Header">
+			 <ConstraintSet>
+				 <ValueConstraint entry="Msg.Hdr.SecHdrFlags" value="1" />
+			 </ConstraintSet>
+			 <EntryList>
+				 <Entry name="Msg" type="Message_t"/>
+				 <Entry name="Sec" type="CCSDS/TlmSecHdr" shortDescription="Telemetry Secondary Header" />
+			 </EntryList>
+		 </ContainerDataType>
+
+		 <IntegerDataType name="Size_t" shortDescription="*&lt; \brief Message size, note CCSDS maximum is UINT16_MAX+7">
+			 <IntegerDataEncoding sizeInBits="32" encoding="unsigned"/>
+			 <Range>
+				 <MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="4294967295"/>
+			 </Range>
+		 </IntegerDataType>
+		 
+		 <IntegerDataType name="FcnCode_t" shortDescription="The function code taken from a command secondary header">
+			 <LongDescription>
+				 Command codes in CFE range are 7 bits (0-127).  The most signficant bit (codes 128-255) are reserved.
+				 Function codes in cFE are 16 bits, but the range of values is stil [0, 127].
+				 There are getter and setter methods in cfe_msg_sechdr_fc.c that enforce this relationship
+			 </LongDescription>
+			 <IntegerDataEncoding sizeInBits="16" encoding="unsigned" />
+			 <Range>
+				 <MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="127" />
+			 </Range>
+		 </IntegerDataType>
+		 
+		 <IntegerDataType name="HeaderVersion_t" shortDescription="*&lt; \brief Message header version">
+			 <IntegerDataEncoding sizeInBits="16" encoding="unsigned" />
+			 <Range>
+				 <MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="65535" />
+			 </Range>
+		 </IntegerDataType>
+		 
+		 <IntegerDataType name="ApId_t" shortDescription="*&lt; \brief Message application ID">
+			 <IntegerDataEncoding sizeInBits="16" encoding="unsigned" />
+			 <Range>
+				 <MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="65535" />
+			 </Range>
+		 </IntegerDataType>
+		 
+		 <IntegerDataType name="SequenceCount_t" shortDescription="*&lt; \brief Message sequence count">
+			 <IntegerDataEncoding sizeInBits="16" encoding="unsigned" />
+			 <Range>
+				 <MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="65535" />
+			 </Range>
+		 </IntegerDataType>
+		 
+		 <IntegerDataType name="EDSVersion_t" shortDescription="*&lt; \brief Message EDS version">
+			 <IntegerDataEncoding sizeInBits="16" encoding="unsigned" />
+			 <Range>
+				 <MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="65535" />
+			 </Range>
+		 </IntegerDataType>
+		 
+		 <IntegerDataType name="Subsystem_t" shortDescription="*&lt; \brief Message subsystem">
+			 <IntegerDataEncoding sizeInBits="16" encoding="unsigned" />
+			 <Range>
+				 <MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="65535" />
+			 </Range>
+		 </IntegerDataType>
+		 
+		 <IntegerDataType name="System_t" shortDescription="*&lt; \brief Message system">
+			 <IntegerDataEncoding sizeInBits="16" encoding="unsigned" />
+			 <Range>
+				 <MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="65535" />
+			 </Range>
+		 </IntegerDataType>
+		 
+		 <EnumeratedDataType name="Type_t" shortDescription="* \brief Message type">
+			 <EnumerationList>
+				 <Enumeration label="CFE_MSG_Type_Invalid" value="0" shortDescription="*&lt; \brief Message type invalid, undefined, not implemented"/>
+			   <Enumeration label="CFE_MSG_Type_Cmd" value="1" shortDescription="*&lt; \brief Command message type"/>
+			   <Enumeration label="CFE_MSG_Type_Tlm" value="2" shortDescription="*&lt; \brief Telemetry message type"/>
+			 </EnumerationList>
+		 </EnumeratedDataType>
+
+		 <EnumeratedDataType name="SegmentationFlag_t" shortDescription="* \brief Segmentation flags">
+			 <EnumerationList>
+				 <Enumeration label="CFE_MSG_SegFlag_Invalid" value="0" shortDescription="*&lt; \brief Invalid segmentation flag"/>
+			   <Enumeration label="CFE_MSG_SegFlag_Continue" value="1" shortDescription="*&lt; \brief Continuation segment of User Data"/>
+			   <Enumeration label="CFE_MSG_SegFlag_First" value="2" shortDescription="*&lt; \brief First segment of User Data"/>
+			   <Enumeration label="CFE_MSG_SegFlag_Last" value="3" shortDescription="*&lt; \brief Last segment of User Data"/>
+			   <Enumeration label="CFE_MSG_SegFlag_Unsegmented" value="4" shortDescription="*&lt; \brief Unsegemented data"/>
+			 </EnumerationList>
+     </EnumeratedDataType>
+		 
+		 <EnumeratedDataType name="Endian_t" shortDescription="* \brief Endian flag">
+			 <EnumerationList>
+				 <Enumeration label="CFE_MSG_Endian_Invalid" value="0" shortDescription="*&lt; \brief Invalid endian setting"/>
+			   <Enumeration label="CFE_MSG_Endian_Big" value="1" shortDescription="*&lt; \brief Big endian"/>
+			   <Enumeration label="CFE_MSG_Endian_Little" value="2" shortDescription="*&lt; \brief Little endian"/>
+			 </EnumerationList>
+		 </EnumeratedDataType>
+		 
+		 <EnumeratedDataType name="PlaybackFlag_t" shortDescription="* \brief Playback flag">
+			 <EnumerationList>
+				 <Enumeration label="CFE_MSG_PlayFlag_Invalid" value="0" shortDescription="*&lt; \brief Invalid playback setting"/>
+			   <Enumeration label="CFE_MSG_PlayFlag_Original" value="1" shortDescription="*&lt; \brief Original"/>
+			   <Enumeration label="CFE_MSG_PlayFlag_Playback" value="2" shortDescription="*&lt; \brief Playback"/>
+			 </EnumerationList>
+		 </EnumeratedDataType>
+
+	 </DataTypeSet>
+
+</Package>
+</PackageFile>
