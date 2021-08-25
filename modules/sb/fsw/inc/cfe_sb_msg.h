@@ -32,6 +32,7 @@
 #ifndef CFE_SB_MSG_H
 #define CFE_SB_MSG_H
 
+#ifndef CFE_EDS_ENABLED_BUILD
 /*
 ** Includes
 */
@@ -39,6 +40,7 @@
 #include "cfe_msg_hdr.h"  /* for header definitions */
 #include "cfe_sb_extern_typedefs.h"
 #include "cfe_es_extern_typedefs.h"
+#endif /* CFE_EDS_ENABLED_BUILD */
 
 /****************************************
 ** SB task command packet command codes
@@ -471,6 +473,7 @@
 */
 #define CFE_SB_SEND_PREV_SUBS_CC 11
 
+#ifndef CFE_EDS_ENABLED_BUILD
 /****************************
 **  SB Command Formats     **
 *****************************/
@@ -801,5 +804,7 @@ typedef struct CFE_SB_AllSubscriptionsTlm
     CFE_MSG_TelemetryHeader_t            Hdr;     /**< \brief Telemetry header */
     CFE_SB_AllSubscriptionsTlm_Payload_t Payload; /**< \brief Telemetry payload */
 } CFE_SB_AllSubscriptionsTlm_t;
+
+#endif /* CFE_EDS_ENABLED_BUILD */
 
 #endif /* CFE_SB_MSG_H */

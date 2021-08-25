@@ -35,6 +35,10 @@
 #include "cfe_es_msg.h" /* needed for local use of CFE_ES_RestartCmd_t */
 #include "cfe_sb_verify.h"
 
+#ifdef CFE_EDS_ENABLED_BUILD
+#include "cfe_sb_eds_designparameters.h"
+#endif /* CFE_EDS_ENABLED_BUILD */
+
 #include <string.h>
 
 /*  Task Globals */

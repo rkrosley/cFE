@@ -40,7 +40,9 @@
 #include "cfe_sb_api_typedefs.h"
 #include "cfe_es_api_typedefs.h"
 #include "cfe_sbr_api_typedefs.h"
+#ifndef CFE_EDS_ENABLED_BUILD
 #include "cfe_msg_api_typedefs.h"
+#endif /* CFE_EDSZ_ENABLED_BUILD */
 #include "cfe_fs_api_typedefs.h"
 #include "cfe_resourceid_api_typedefs.h"
 #include "cfe_sb_destination_typedef.h"

@@ -32,12 +32,14 @@
 #ifndef CFE_TIME_MSG_H
 #define CFE_TIME_MSG_H
 
+#ifndef CFE_EDS_ENABLED_BUILD
 /*
 ** Required header files...
 */
 #include "common_types.h" /* Basic data types */
 #include "cfe_msg_hdr.h"  /* for header definitions */
 #include "cfe_time_extern_typedefs.h"
+#endif /* CFE_EDS_ENABLED_BUILD */
 
 /*************************************************************************/
 
@@ -723,6 +725,8 @@
 #define CFE_TIME_FLAG_UNUSED 0x000F /**< \brief Reserved flags - should be zero */
 /** \} */
 
+#ifndef CFE_EDS_ENABLED_BUILD
+
 /*************************************************************************/
 
 /**
@@ -1125,5 +1129,7 @@ typedef struct CFE_TIME_DiagnosticTlm
     CFE_MSG_TelemetryHeader_t        TlmHeader; /**< \brief Telemetry header */
     CFE_TIME_DiagnosticTlm_Payload_t Payload;   /**< \brief Telemetry payload */
 } CFE_TIME_DiagnosticTlm_t;
+
+#endif /* CFE_EDS_ENABLED_BUILD */
 
 #endif /* CFE_TIME_MSG_H */

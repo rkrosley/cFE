@@ -91,10 +91,14 @@ enum CFE_SB_QosReliability
  */
 typedef uint8 CFE_SB_QosReliability_Enum_t;
 
+#endif /* CFE_EDS_ENABLED_BUILD */
+
 /**
  * @brief An integer type that should be used for indexing into the Routing Table
  */
 typedef uint16 CFE_SB_RouteId_Atom_t;
+
+#ifndef CFE_EDS_ENABLED_BUILD
 
 /**
  * @brief  CFE_SB_MsgId_t primitive type definition

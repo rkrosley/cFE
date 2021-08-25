@@ -60,7 +60,8 @@
 			 </EntryList>
 		 </ContainerDataType>
 
-		 <IntegerDataType name="Size_t" shortDescription="*&lt; \brief Message size, note CCSDS maximum is UINT16_MAX+7">
+		 <IntegerDataType name="Size_t" unit="byte" quantityKind="informationQK"
+											shortDescription="*&lt; \brief Message size, note CCSDS maximum is UINT16_MAX+7">
 			 <IntegerDataEncoding sizeInBits="32" encoding="unsigned"/>
 			 <Range>
 				 <MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="4294967295"/>

@@ -32,6 +32,7 @@
 #ifndef CFE_TBL_MSG_H
 #define CFE_TBL_MSG_H
 
+#ifndef CFE_EDS_ENABLED_BUILD
 /*
 ** Required header files...
 */
@@ -39,7 +40,7 @@
 #include "cfe_msg_hdr.h"  /* for header definitions */
 #include "cfe_tbl_extern_typedefs.h"
 #include "cfe_time_extern_typedefs.h"
-
+#endif /* CFE_EDS_ENABLED_BUILD */
 /*************************************************************************/
 
 /*
@@ -475,6 +476,7 @@
 #define CFE_TBL_ABORT_LOAD_CC 9
 /** \} */
 
+#ifndef CFE_EDS_ENABLED_BUILD
 /*************************************************************************/
 
 /********************************/
@@ -834,5 +836,7 @@ typedef struct CFE_TBL_TableRegistryTlm
     CFE_MSG_TelemetryHeader_t      TlmHeader; /**< \brief Telemetry header */
     CFE_TBL_TblRegPacket_Payload_t Payload;   /**< \brief Telemetry payload */
 } CFE_TBL_TableRegistryTlm_t;
+
+#endif /* CFE_EDS_ENABLED_BUILD */
 
 #endif /* CFE_TBL_MSG_H */

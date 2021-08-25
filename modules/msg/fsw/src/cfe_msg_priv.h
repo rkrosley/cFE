@@ -32,7 +32,9 @@
  * Includes
  */
 #include "common_types.h"
+#ifndef CFE_EDS_ENABLED_BUILD
 #include "cfe_msg_hdr.h"
+#endif /* CFE_EDS_ENABLED_BUILD */
 
 /*---------------------------------------------------------------------------------------*/
 /**

@@ -34,7 +34,9 @@
  */
 #include "common_types.h"
 #include "cfe_sbr_api_typedefs.h"
+#ifndef CFE_EDS_ENABLED_BUILD
 #include "cfe_msg_api_typedefs.h"
+#endif /* CFE_EDS_ENABLED_BUILD */
 #include "cfe_sb_destination_typedef.h"
 #include "cfe_sb_api_typedefs.h"
 

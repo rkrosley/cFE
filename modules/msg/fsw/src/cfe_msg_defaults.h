@@ -33,7 +33,9 @@
  */
 #include "cfe_platform_cfg.h"
 #include "cfe_mission_cfg.h"
+#ifndef CFE_EDS_ENABLED_BUILD
 #include "cfe_msg_api_typedefs.h"
+#endif /* CFE_EDS_ENABLED_BUILD */
 
 /*
  * Defines
