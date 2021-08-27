@@ -32,18 +32,21 @@
 
    <DataTypeSet>
 		 
-		 <ContainerDataType name="Message_t">
+		 <ContainerDataType name="Message_t" buffer="memberUnion">
 			 <EntryList>
-				 <Entry name="Hdr" type="CCSDS/${CCSDS_SPACEPACKET/HEADER_TYPE}" shortDescription="Primary Header" />
+				 <Entry name="CCSDS" type="CCSDS/${CCSDS_SPACEPACKET/HEADER_TYPE}" shortDescription="Primary Header"/>
+			   <Entry name="Byte" type="BASE_TYPES/uint8">
+					 <ArrayDimensions>
+						 <Dimension size="1"/>
+					 </ArrayDimensions>
+				 </Entry>
 			 </EntryList>
 		 </ContainerDataType>
 
-		 <!--<ContainerDataType name="Message_t" baseType="CCSDS/SpacePacket" buffer="subclassUnion"/>-->
-
 		 <ContainerDataType name="CommandHeader" shortDescription="Complete Command Packet Header">
-			 <ConstraintSet>
-				 <ValueConstraint entry="Msg.Hdr.SecHdrFlags" value="3" />
-			 </ConstraintSet>
+			 <!--<ConstraintSet>
+				 <ValueConstraint entry="Msg.Pri.SecHdrFlags" value="3" />
+			 </ConstraintSet>-->
 			 <EntryList>
 				 <Entry name="Msg" type="Message_t"/>
 				 <Entry name="Sec" type="CCSDS/CmdSecHdr" shortDescription="Command Secondary Header" />
@@ -51,9 +54,9 @@
 		 </ContainerDataType>
 
 		 <ContainerDataType name="TelemetryHeader" shortDescription="Complete Telemetry Packet Header">
-			 <ConstraintSet>
-				 <ValueConstraint entry="Msg.Hdr.SecHdrFlags" value="1" />
-			 </ConstraintSet>
+			 <!--<ConstraintSet>
+				 <ValueConstraint entry="Msg.Pri.SecHdrFlags" value="1" />
+			 </ConstraintSet>-->
 			 <EntryList>
 				 <Entry name="Msg" type="Message_t"/>
 				 <Entry name="Sec" type="CCSDS/TlmSecHdr" shortDescription="Telemetry Secondary Header" />
@@ -62,6 +65,13 @@
 
 		 <IntegerDataType name="Size_t" unit="byte" quantityKind="informationQK"
 											shortDescription="*&lt; \brief Message size, note CCSDS maximum is UINT16_MAX+7">
+			 <IntegerDataEncoding sizeInBits="32" encoding="unsigned"/>
+			 <Range>
+				 <MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="4294967295"/>
+			 </Range>
+		 </IntegerDataType>
+		 
+		 <IntegerDataType name="Checksum_t" shortDescription="*&lt; \brief Message checksum (Oversized to avoid redefine)">
 			 <IntegerDataEncoding sizeInBits="32" encoding="unsigned"/>
 			 <Range>
 				 <MinMaxRange rangeType="inclusiveMinInclusiveMax" min="0" max="4294967295"/>
@@ -157,6 +167,8 @@
 		 </EnumeratedDataType>
 
 	 </DataTypeSet>
-
+<Define name="CFE_MSG_BAD_ARGUMENT" value="CFE_SB_BAD_ARGUMENT"/>
+<Define name="CFE_MSG_NOT_IMPLEMENTED" value="CFE_SB_NOT_IMPLEMENTED"/>
+<Define name="CFE_MSG_WRONG_MSG_TYPE" value="CFE_SB_WRONG_MSG_TYPE"/>
 </Package>
 </PackageFile>

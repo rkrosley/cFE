@@ -919,7 +919,7 @@
           None
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="0" />
+          <ValueConstraint entry="Sec.FunctionCode" value="0" />
         </ConstraintSet>
       </ContainerDataType>
 
@@ -966,7 +966,7 @@
           \sa  #CFE_ES_RESET_PR_COUNT_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="1" />
+          <ValueConstraint entry="Sec.FunctionCode" value="1" />
         </ConstraintSet>
       </ContainerDataType>
 
@@ -1024,7 +1024,7 @@
           \sa  #CFE_ES_RESET_PR_COUNT_CC, #CFE_ES_SET_MAX_PR_COUNT_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="2" />
+          <ValueConstraint entry="Sec.FunctionCode" value="2" />
         </ConstraintSet>
         <EntryList>
           <Entry type="RestartCmd_Payload" name="Payload" />
@@ -1082,7 +1082,7 @@
           significant problems.
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="3" />
+          <ValueConstraint entry="Sec.FunctionCode" value="3" />
         </ConstraintSet>
         <EntryList>
           <Entry type="ShellCmd_Payload" name="Payload" />
@@ -1140,7 +1140,7 @@
           \sa  #CFE_ES_STOP_APP_CC, #CFE_ES_RESTART_APP_CC, #CFE_ES_RELOAD_APP_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="4" />
+          <ValueConstraint entry="Sec.FunctionCode" value="4" />
         </ConstraintSet>
         <EntryList>
           <Entry type="StartAppCmd_Payload" name="Payload" />
@@ -1201,7 +1201,7 @@
           \sa  #CFE_ES_START_APP_CC, #CFE_ES_RESTART_APP_CC, #CFE_ES_RELOAD_APP_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="5" />
+          <ValueConstraint entry="Sec.FunctionCode" value="5" />
         </ConstraintSet>
         <EntryList>
           <Entry type="AppNameCmd_Payload" name="Payload" />
@@ -1255,7 +1255,7 @@
           \sa  #CFE_ES_START_APP_CC, #CFE_ES_STOP_APP_CC, #CFE_ES_RELOAD_APP_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="6" />
+          <ValueConstraint entry="Sec.FunctionCode" value="6" />
         </ConstraintSet>
         <EntryList>
           <Entry type="AppNameCmd_Payload" name="Payload" />
@@ -1312,7 +1312,7 @@
           \sa  #CFE_ES_START_APP_CC, #CFE_ES_STOP_APP_CC, #CFE_ES_RESTART_APP_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="7" />
+          <ValueConstraint entry="Sec.FunctionCode" value="7" />
         </ConstraintSet>
         <EntryList>
           <Entry type="AppReloadCmd_Payload" name="Payload" />
@@ -1360,7 +1360,7 @@
           \sa  #CFE_ES_QUERY_ALL_CC, #CFE_ES_QUERY_ALL_TASKS_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="8" />
+          <ValueConstraint entry="Sec.FunctionCode" value="8" />
         </ConstraintSet>
         <EntryList>
           <Entry type="AppNameCmd_Payload" name="Payload" />
@@ -1413,7 +1413,7 @@
           \sa  #CFE_ES_QUERY_ONE_CC, #CFE_ES_QUERY_ALL_TASKS_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="9" />
+          <ValueConstraint entry="Sec.FunctionCode" value="9" />
         </ConstraintSet>
         <EntryList>
           <Entry type="FileNameCmd_Payload" name="Payload" />
@@ -1462,7 +1462,7 @@
           #CFE_ES_OVERWRITE_SYSLOG_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="10" />
+          <ValueConstraint entry="Sec.FunctionCode" value="10" />
         </ConstraintSet>
       </ContainerDataType>
 
@@ -1513,7 +1513,7 @@
           #CFE_ES_OVERWRITE_SYSLOG_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="11" />
+          <ValueConstraint entry="Sec.FunctionCode" value="11" />
         </ConstraintSet>
         <EntryList>
           <Entry type="FileNameCmd_Payload" name="Payload" />
@@ -1561,7 +1561,7 @@
           \sa  #CFE_ES_CLEAR_SYSLOG_CC, #CFE_ES_WRITE_SYSLOG_CC, #CFE_ES_WRITE_ERLOG_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="12" />
+          <ValueConstraint entry="Sec.FunctionCode" value="12" />
         </ConstraintSet>
       </ContainerDataType>
 
@@ -1611,7 +1611,7 @@
           \sa  #CFE_ES_CLEAR_SYSLOG_CC, #CFE_ES_WRITE_SYSLOG_CC, #CFE_ES_CLEAR_ERLOG_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="13" />
+          <ValueConstraint entry="Sec.FunctionCode" value="13" />
         </ConstraintSet>
         <EntryList>
           <Entry type="FileNameCmd_Payload" name="Payload" />
@@ -1668,7 +1668,7 @@
           \sa  #CFE_ES_PERF_STOPDATA_CC, #CFE_ES_PERF_SETFILTERMASK_CC, #CFE_ES_PERF_SETTRIGMASK_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="14" />
+          <ValueConstraint entry="Sec.FunctionCode" value="14" />
         </ConstraintSet>
         <EntryList>
           <Entry type="StartPerfCmd_Payload" name="Payload" />
@@ -1722,7 +1722,7 @@
           \sa  #CFE_ES_PERF_STARTDATA_CC, #CFE_ES_PERF_SETFILTERMASK_CC, #CFE_ES_PERF_SETTRIGMASK_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="15" />
+          <ValueConstraint entry="Sec.FunctionCode" value="15" />
         </ConstraintSet>
         <EntryList>
           <Entry type="StopPerfCmd_Payload" name="Payload" />
@@ -1771,7 +1771,7 @@
           \sa  #CFE_ES_PERF_STARTDATA_CC, #CFE_ES_PERF_STOPDATA_CC, #CFE_ES_PERF_SETTRIGMASK_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="16" />
+          <ValueConstraint entry="Sec.FunctionCode" value="16" />
         </ConstraintSet>
         <EntryList>
           <Entry type="SetPerfFilterMaskCmd_Payload" name="Payload" />
@@ -1819,7 +1819,7 @@
           \sa  #CFE_ES_PERF_STARTDATA_CC, #CFE_ES_PERF_STOPDATA_CC, #CFE_ES_PERF_SETFILTERMASK_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="17" />
+          <ValueConstraint entry="Sec.FunctionCode" value="17" />
         </ConstraintSet>
         <EntryList>
           <Entry type="SetPerfTrigMaskCmd_Payload" name="Payload" />
@@ -1871,7 +1871,7 @@
           \sa  #CFE_ES_CLEAR_SYSLOG_CC, #CFE_ES_WRITE_SYSLOG_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="18" />
+          <ValueConstraint entry="Sec.FunctionCode" value="18" />
         </ConstraintSet>
         <EntryList>
           <Entry type="OverWriteSysLogCmd_Payload" name="Payload" />
@@ -1922,7 +1922,7 @@
           \sa  #CFE_ES_SET_MAX_PR_COUNT_CC, #CFE_ES_RESET_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="19" />
+          <ValueConstraint entry="Sec.FunctionCode" value="19" />
         </ConstraintSet>
       </ContainerDataType>
 
@@ -1971,7 +1971,7 @@
           \sa  #CFE_ES_RESET_PR_COUNT_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="20" />
+          <ValueConstraint entry="Sec.FunctionCode" value="20" />
         </ConstraintSet>
         <EntryList>
           <Entry type="SetMaxPRCountCmd_Payload" name="Payload" />
@@ -2025,7 +2025,7 @@
           \sa  #CFE_ES_DUMP_CDS_REG_CC, #CFE_TBL_DELETE_CDS_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="21" />
+          <ValueConstraint entry="Sec.FunctionCode" value="21" />
         </ConstraintSet>
         <EntryList>
           <Entry type="DeleteCDSCmd_Payload" name="Payload" />
@@ -2076,7 +2076,7 @@
           used in the command is correct.
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="22" />
+          <ValueConstraint entry="Sec.FunctionCode" value="22" />
         </ConstraintSet>
         <EntryList>
           <Entry type="SendMemPoolStatsCmd_Payload" name="Payload" />
@@ -2128,7 +2128,7 @@
           \sa  #CFE_ES_DELETE_CDS_CC, #CFE_TBL_DELETE_CDS_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="23" />
+          <ValueConstraint entry="Sec.FunctionCode" value="23" />
         </ConstraintSet>
         <EntryList>
           <Entry type="DumpCDSRegistryCmd_Payload" name="Payload" />
@@ -2181,7 +2181,7 @@
           \sa  #CFE_ES_QUERY_ALL_CC, CFE_ES_QUERY_ONE_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="24" />
+          <ValueConstraint entry="Sec.FunctionCode" value="24" />
         </ConstraintSet>
         <EntryList>
           <Entry type="FileNameCmd_Payload" name="Payload" />

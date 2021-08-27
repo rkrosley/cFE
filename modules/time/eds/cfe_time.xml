@@ -517,7 +517,7 @@
           None
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="0" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="0" />
         </ConstraintSet>
 				<EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -566,7 +566,7 @@
           None
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="1" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="1" />
         </ConstraintSet>
 				<EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -606,7 +606,7 @@
           \sa
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="2" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="2" />
         </ConstraintSet>
 				<EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -621,7 +621,7 @@
 
 			<ContainerDataType name="ToneSignalCmd">
 				<ConstraintSet>
-					<ValueConstraint entry="CmdHeader.Sec.Command" value="15" />
+					<ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="15" />
 				</ConstraintSet>
 				<EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -688,7 +688,7 @@
           \sa  #CFE_TIME_SET_STATE_CC, #CFE_TIME_SET_SIGNAL_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="3" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="3" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -756,7 +756,7 @@
           \sa  #CFE_TIME_SET_SOURCE_CC, #CFE_TIME_SET_SIGNAL_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="4" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="4" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -803,7 +803,7 @@
           \sa  #CFE_TIME_SUB_DELAY_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="5" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="5" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -851,7 +851,7 @@
           \sa  #CFE_TIME_ADD_DELAY_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="6" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="6" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -907,7 +907,7 @@
           \sa  #CFE_TIME_SET_MET_CC, #CFE_TIME_SET_STCF_CC, #CFE_TIME_SET_LEAPS_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="7" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="7" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -959,7 +959,7 @@
           \sa  #CFE_TIME_SET_TIME_CC, #CFE_TIME_SET_STCF_CC, #CFE_TIME_SET_LEAPS_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="8" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="8" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -1005,7 +1005,7 @@
           \sa  #CFE_TIME_SET_TIME_CC, #CFE_TIME_SET_MET_CC, #CFE_TIME_SET_LEAPS_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="9" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="9" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -1049,7 +1049,7 @@
           \sa  #CFE_TIME_SET_TIME_CC, #CFE_TIME_SET_MET_CC, #CFE_TIME_SET_STCF_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="10" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="10" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -1093,7 +1093,7 @@
           \sa  #CFE_TIME_ADD_ADJUST_CC, #CFE_TIME_SUB_ADJUST_CC, #CFE_TIME_ADD_1HZADJ_CC, #CFE_TIME_SUB_1HZADJ_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="11" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="11" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -1136,7 +1136,7 @@
           \sa  #CFE_TIME_ADD_ADJUST_CC, #CFE_TIME_ADD_1HZADJ_CC, #CFE_TIME_SUB_1HZADJ_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="12" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="12" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -1193,7 +1193,7 @@
           \sa  #CFE_TIME_ADD_ADJUST_CC, #CFE_TIME_SUB_ADJUST_CC, #CFE_TIME_SUB_1HZADJ_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="13" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="13" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -1250,7 +1250,7 @@
           \sa  #CFE_TIME_ADD_ADJUST_CC, #CFE_TIME_SUB_ADJUST_CC, #CFE_TIME_ADD_1HZADJ_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="14" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="14" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -1302,7 +1302,7 @@
           \sa  #CFE_TIME_SET_STATE_CC, #CFE_TIME_SET_SOURCE_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="15" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="15" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>

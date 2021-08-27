@@ -104,6 +104,41 @@
             The Primary message header that is present in all CCSDS Space Protocol packets
          </LongDescription>
          <EntryList>
+					 <Entry name="StreamId" type="BASE_TYPES/uint8">
+						 <LongDescription>
+							 *&lt; \brief packet identifier word (stream ID)
+                       bits  shift   ------------ description ----------------
+                       0x07FF    0  : application ID
+                       0x0800   11  : secondary header: 0 = absent, 1 = present
+                       0x1000   12  : packet type:      0 = TLM, 1 = CMD
+                       0xE000   13  : CCSDS version:    0 = ver 1, 1 = ver 2
+						 </LongDescription>
+						 <ArrayDimensions>
+							 <Dimension size="2"/>
+						 </ArrayDimensions>
+					 </Entry>
+					 <Entry name="Sequence" type="BASE_TYPES/uint8">
+						 <LongDescription>
+							 *&lt; \brief packet sequence word
+                       bits  shift   ------------ description ----------------
+                       0x3FFF    0  : sequence count
+                       0xC000   14  : segmentation flags:  3 = complete packet
+						 </LongDescription>
+						 <ArrayDimensions>
+							 <Dimension size="2"/>
+						 </ArrayDimensions>
+					 </Entry>
+					 <Entry name="Length" type="BASE_TYPES/uint8">
+						 <LongDescription>
+							 *&lt; \brief packet length word
+                     bits  shift   ------------ description ----------------
+                     0xFFFF    0  : (total packet length) - 7
+						 </LongDescription>
+						 <ArrayDimensions>
+							 <Dimension size="2"/>
+						 </ArrayDimensions>
+					 </Entry>
+						<!-- The structure above is what FSW uses.  The structure below is defined by CCSDS.
             <Entry name="VersionId" type="VersionId" shortDescription="CCSDS Version number" />
             <Entry name="SecHdrFlags" type="SecHdrFlags" shortDescription="Secondary Header Presence and Type Flags" />
             <Entry name="AppId" type="AppId" shortDescription="Packet identifier word (stream ID)" />
@@ -115,13 +150,17 @@
                     <Term coefficient="7" exponent="0" />
                 </PolynomialCalibrator>
             </LengthEntry>
+						-->
          </EntryList>
       </ContainerDataType>
 
-      <ContainerDataType name="PriHdr" baseType="BaseHdr" shortDescription="Space packet protocol header version 1">
-         <ConstraintSet>
+      <ContainerDataType name="PriHdr" shortDescription="Space packet protocol header version 1">
+         <!--<ConstraintSet>
            <ValueConstraint entry="VersionId" value="0" />
-         </ConstraintSet>
+         </ConstraintSet>-->
+				<EntryList>
+					<Entry name="Pri" type="BaseHdr"/>
+				</EntryList>
       </ContainerDataType>
 
       <IntegerDataType name="SubsystemId" shortDescription="Subsystem ID value">
@@ -157,11 +196,35 @@
            The APID qualifier header extension that is present in CCSDS version 2
         </LongDescription>
         <EntryList>
+					<Entry name="Subsystem" type="BASE_TYPES/uint8">
+						<LongDescription>
+							*&lt; \brief subsystem qualifier
+                        bits  shift   ------------ description ----------------
+                        0x01FF   0  : Subsystem Id  mission defined
+                        0x0200   9  : Playback flag  0 = original, 1 = playback
+                        0x0400  10  : Endian:   Big = 0, Little (Intel) = 1
+                        0xF800  11  : EDS Version for packet definition used
+						</LongDescription>
+						<ArrayDimensions>
+							<Dimension size="2"/>
+						</ArrayDimensions>
+					</Entry>
+					<Entry name="SystemId" type="BASE_TYPES/uint8">
+						<LongDescription>
+							*&lt; \brief system qualifier
+                       0xFFFF   0  : System Id      mission defined
+						</LongDescription>
+						<ArrayDimensions>
+							<Dimension size="2"/>
+						</ArrayDimensions>
+					</Entry>
+						<!-- The structure above is what FSW uses.  The structure below is defined by CCSDS.
           <Entry name="EdsVersionId" type="EdsVersionId" shortDescription="EDS-specific datatype identifier" />
           <Entry name="Endian" type="SingleBitFlag" shortDescription="Reserved, always set FALSE" />
           <Entry name="Playback" type="SingleBitFlag" shortDescription="Set to TRUE if data is playback, FALSE for realtime" />
           <Entry name="SubsystemId" type="SubsystemId" shortDescription="Mission-defined usage" />
           <Entry name="SystemId" type="SystemId" shortDescription="Mission-defined usage" />
+					-->
         </EntryList>
       </ContainerDataType>
 
@@ -169,15 +232,16 @@
       The APID qualifier (aka Version 2) Primary Header:
          This is the the same as the version 1 primary header but extended with APID qualifier data
       -->
-      <ContainerDataType name="APIDQHdr" baseType="BaseHdr" shortDescription="Space packet protocol v2 header">
+      <ContainerDataType name="APIDQHdr" shortDescription="Space packet protocol v2 header">
          <LongDescription>
             The APID qualified primary header that is present in all CCSDS Space Protocol version 2 packets
          </LongDescription>
-         <ConstraintSet>
+         <!--<ConstraintSet>
            <ValueConstraint entry="VersionId" value="1" />
-         </ConstraintSet>
+         </ConstraintSet>-->
          <EntryList>
-           <Entry name="ApidQ" type="APIDqualifiers" shortDescription="APID qualifiers" />
+					 <Entry name="Pri" type="BaseHdr"/>
+           <Entry name="Ext" type="APIDqualifiers" shortDescription="APID qualifiers" />
          </EntryList>
       </ContainerDataType>
 
@@ -186,7 +250,7 @@
             The secondary message header that is present in all cFE command messages
          </LongDescription>
          <EntryList>
-            <Entry name="Command" type="CommandCode" shortDescription="Command Identifier Word" />
+            <Entry name="FunctionCode" type="CommandCode" shortDescription="Command Identifier Word" />
             <ErrorControlEntry name="Checksum" type="ChecksumType" shortDescription="Checksum, calculated by ground system" errorControlType="CHECKSUM_LONGITUDINAL"/>
          </EntryList>
       </ContainerDataType>
@@ -196,20 +260,31 @@
             The secondary message header that is present in all cFE telemetry messages
          </LongDescription>
          <EntryList>
-            <Entry name="Seconds" type="BASE_TYPES/uint32" shortDescription="Time since epoch, in seconds" />
-            <Entry name="Subseconds" type="${CCSDS_SPACEPACKET/TELEMETRY_SUBSECONDS_TYPE}" shortDescription="Time since epoch, in subseconds" />
+					 <Entry name="Time" type="BASE_TYPES/uint8"
+									shortDescription="*&lt; \brief Time, big endian: 4 byte seconds, 2 byte subseconds">
+						 <ArrayDimensions>
+							 <Dimension size="6"/>
+						 </ArrayDimensions>
+					 </Entry>
          </EntryList>
       </ContainerDataType>
 
       <ContainerDataType name="SpacePacket">
-         <EntryList>
-            <Entry name="Hdr" type="${CCSDS_SPACEPACKET/HEADER_TYPE}" shortDescription="Primary Header" />
-         </EntryList>
-      </ContainerDataType>
+				<LongDescription>
+					This type is equivalent to the CFE_MSG_Message_t,
+					except that the derivation of message types occurs at CFE_MSG_Message_t.
+					This type should have no derived message types.
+					This type is present because some flight software refers to this type as a name for the primary header.
+					The CFE_MSG_Message_t is used by recent flight software for derivation of the subclass tree
+				</LongDescription>
+			  <EntryList>
+			    <Entry name="CCSDS" type="CCSDS/${CCSDS_SPACEPACKET/HEADER_TYPE}" shortDescription="Primary Header"/>
+		    </EntryList>
+		  </ContainerDataType>
 
 		 <ContainerDataType name="PacketContainer" shortDescription="A buffer capable of storing any Space Packet" >
          <EntryList>
-            <Entry name="Data" type="SpacePacket" shortDescription="Packet Content" />
+            <Entry name="Data" type="${CCSDS_SPACEPACKET/HEADER_TYPE}" shortDescription="Packet Content" />
          </EntryList>
       </ContainerDataType>
 

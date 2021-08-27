@@ -414,7 +414,7 @@
           None
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="0" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="0" />
         </ConstraintSet>
 				<EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -455,7 +455,7 @@
           values that are reset by this command.
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="1" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="1" />
         </ConstraintSet>
 				<EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -512,7 +512,7 @@
           \sa  #CFE_TBL_DUMP_CC, #CFE_TBL_VALIDATE_CC, #CFE_TBL_ACTIVATE_CC, #CFE_TBL_ABORT_LOAD_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="2" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="2" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -560,7 +560,7 @@
           \sa  #CFE_TBL_LOAD_CC, #CFE_TBL_VALIDATE_CC, #CFE_TBL_ACTIVATE_CC, #CFE_TBL_ABORT_LOAD_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="3" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="3" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -620,7 +620,7 @@
           \sa  #CFE_TBL_LOAD_CC, #CFE_TBL_DUMP_CC, #CFE_TBL_ACTIVATE_CC, #CFE_TBL_ABORT_LOAD_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="4" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="4" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -665,7 +665,7 @@
           \sa  #CFE_TBL_LOAD_CC, #CFE_TBL_DUMP_CC, #CFE_TBL_VALIDATE_CC, #CFE_TBL_ABORT_LOAD_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="5" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="5" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -713,7 +713,7 @@
           \sa  #CFE_TBL_TLM_REG_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="6" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="6" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -754,7 +754,7 @@
           \sa  #CFE_TBL_DUMP_REG_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="7" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="7" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -804,7 +804,7 @@
           \sa  #CFE_ES_DUMP_CDS_REG_CC, #CFE_ES_DELETE_CDS_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="8" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="8" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>
@@ -849,7 +849,7 @@
           \sa  #CFE_TBL_LOAD_CC, #CFE_TBL_DUMP_CC, #CFE_TBL_VALIDATE_CC, #CFE_TBL_ACTIVATE_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="CmdHeader.Sec.Command" value="9" />
+          <ValueConstraint entry="CmdHeader.Sec.FunctionCode" value="9" />
         </ConstraintSet>
         <EntryList>
 					<Entry type="CFE_MSG/CommandHeader" name="CmdHeader"/>

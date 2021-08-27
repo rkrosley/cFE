@@ -22,7 +22,12 @@
  * Message default header initialization - implementation without CCSDS
  * extended header
  */
+#ifndef CFE_EDS_ENABLED_BUILD
 #include "cfe_msg_hdr.h"
+#else
+#include <stddef.h>
+#include "cfe_msg_eds_typedefs.h"
+#endif /* CFE_EDS_ENABLED_BUILD */
 #include "cfe_msg_defaults.h"
 
 /*----------------------------------------------------------------

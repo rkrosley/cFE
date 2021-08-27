@@ -52,9 +52,10 @@
 
   <Package name="CCSDS_SPACEPACKET" shortDescription="CCSDS Configuration">
      <!-- Select CCSDS v1 headers only (no APID qualifiers) -->
-     <!-- <Define name="HEADER_TYPE" value="PriHdr" /> -->
+     <Define name="HEADER_TYPE" value="PriHdr" />
      <!-- Select CCSDS v2 headers (with APID qualifiers) -->
-     <Define name="HEADER_TYPE" value="APIDQHdr" />
+     <!-- <Define name="HEADER_TYPE" value="APIDQHdr" /> -->
+		 <Define name="QUALIFIED_HEADER_TYPE" value="CCSDS_${HEADER_TYPE}_t" />
 		 <Define name="TELEMETRY_SUBSECONDS_TYPE" value="Telemetry_Subseconds_16_Type"/>
 	</Package>
 

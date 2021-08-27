@@ -502,7 +502,7 @@
           None
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="0" />
+          <ValueConstraint entry="Sec.FunctionCode" value="0" />
         </ConstraintSet>
       </ContainerDataType>
 
@@ -539,7 +539,7 @@
           values that are reset by this command.
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="1" />
+          <ValueConstraint entry="Sec.FunctionCode" value="1" />
         </ConstraintSet>
       </ContainerDataType>
 
@@ -577,7 +577,7 @@
           \sa
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="2" />
+          <ValueConstraint entry="Sec.FunctionCode" value="2" />
         </ConstraintSet>
       </ContainerDataType>
 
@@ -624,7 +624,7 @@
           \sa  #CFE_SB_SEND_PIPE_INFO_CC, #CFE_SB_SEND_MAP_INFO_CC, #CFE_SB_WriteFileInfoCmd_t
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="3" />
+          <ValueConstraint entry="Sec.FunctionCode" value="3" />
         </ConstraintSet>
         <EntryList>
           <Entry type="WriteFileInfoCmd_Payload" name="Payload" />
@@ -670,7 +670,7 @@
           \sa  #CFE_SB_SEND_ROUTING_INFO_CC, #CFE_SB_DISABLE_ROUTE_CC, #CFE_SB_EnableRouteCmd_t
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="4" />
+          <ValueConstraint entry="Sec.FunctionCode" value="4" />
         </ConstraintSet>
         <EntryList>
           <Entry type="RouteCmd_Payload" name="Payload" />
@@ -719,7 +719,7 @@
           \sa  #CFE_SB_SEND_ROUTING_INFO_CC, #CFE_SB_ENABLE_ROUTE_CC, #CFE_SB_EnableRouteCmd_t
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="5" />
+          <ValueConstraint entry="Sec.FunctionCode" value="5" />
         </ConstraintSet>
         <EntryList>
           <Entry type="RouteCmd_Payload" name="Payload" />
@@ -769,7 +769,7 @@
           \sa  #CFE_SB_SEND_ROUTING_INFO_CC, #CFE_SB_SEND_MAP_INFO_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="7" />
+          <ValueConstraint entry="Sec.FunctionCode" value="7" />
         </ConstraintSet>
         <EntryList>
           <Entry type="WriteFileInfoCmd_Payload" name="Payload" />
@@ -820,7 +820,7 @@
           \sa  #CFE_SB_SEND_ROUTING_INFO_CC, #CFE_SB_SEND_PIPE_INFO_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="8" />
+          <ValueConstraint entry="Sec.FunctionCode" value="8" />
         </ConstraintSet>
         <EntryList>
           <Entry type="WriteFileInfoCmd_Payload" name="Payload" />
@@ -859,7 +859,7 @@
           #CFE_SB_SEND_PREV_SUBS_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="9" />
+          <ValueConstraint entry="Sec.FunctionCode" value="9" />
         </ConstraintSet>
       </ContainerDataType>
 
@@ -895,7 +895,7 @@
           #CFE_SB_SEND_PREV_SUBS_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="10" />
+          <ValueConstraint entry="Sec.FunctionCode" value="10" />
         </ConstraintSet>
       </ContainerDataType>
 
@@ -931,7 +931,7 @@
           #CFE_SB_DISABLE_SUB_REPORTING_CC
         </LongDescription>
         <ConstraintSet>
-          <ValueConstraint entry="Sec.Command" value="11" />
+          <ValueConstraint entry="Sec.FunctionCode" value="11" />
         </ConstraintSet>
       </ContainerDataType>
 
@@ -947,10 +947,10 @@
         </LongDescription>
         <CommandSet>
           <Command name="send">
-            <Argument name="data" type="CCSDS/SpacePacket" mode="in" dataUnit="true" />
+            <Argument name="data" type="CCSDS/${CCSDS_SPACEPACKET/HEADER_TYPE}" mode="in" dataUnit="true" />
           </Command>
           <Command name="receive">
-            <Argument name="data" type="CCSDS/SpacePacket" mode="out" dataUnit="true" />
+            <Argument name="data" type="CCSDS/${CCSDS_SPACEPACKET/HEADER_TYPE}" mode="out" dataUnit="true" />
           </Command>
         </CommandSet>
       </Interface>
@@ -969,10 +969,10 @@
         </ParameterSet>
         <CommandSet>
           <Command name="send">
-            <Argument name="data" type="CCSDS/SpacePacket" mode="in" />
+            <Argument name="data" type="CCSDS/${CCSDS_SPACEPACKET/HEADER_TYPE}" mode="in" />
           </Command>
           <Command name="receive">
-            <Argument name="data" type="CCSDS/SpacePacket" mode="out" />
+            <Argument name="data" type="CCSDS/${CCSDS_SPACEPACKET/HEADER_TYPE}" mode="out" />
           </Command>
         </CommandSet>
       </Interface>
