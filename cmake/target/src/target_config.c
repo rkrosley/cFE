@@ -40,8 +40,6 @@
 #include "cfe_es_resetdata_typedef.h"
 #include "cfe_version.h"   /* for CFE_VERSION_STRING */
 #include "osapi-version.h" /* for OS_VERSION_STRING */
-#include "cfecfs_version_info.h"
-#include "cfecfs_build_info.h"
 #include "edslib_api_types.h"
 #include "cfe_mission_eds_parameters.h"
 

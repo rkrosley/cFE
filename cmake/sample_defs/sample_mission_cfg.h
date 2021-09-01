@@ -37,10 +37,13 @@
 #ifndef SAMPLE_MISSION_CFG_H
 #define SAMPLE_MISSION_CFG_H
 
-/*
+#ifdef CFE_EDS_ENABLED_BUILD
+ /* This inclusion defines many of the parameters in this file when CFE_EDS_ENABLED_BUILD is defined. */
+ /*
  * Pull in defintions from EDS
  */
 #include "samplemission_eds_designparameters.h"
+#endif /* CFE_EDS_ENABLED_BUILD */
 
 /**
 **  \cfesbcfg Maximum SB Message Size
@@ -232,6 +235,8 @@
 */
 #define CFE_MISSION_TIME_FS_FACTOR 789004800
 
+#ifndef CFE_EDS_ENABLED_BUILD
+/* This parameter is defined in cfe_mission_eds_designparameters.h when CFE_EDS_ENABLED_BUILD is defined. */
 /**
 **  \cfeescfg Maximum Length of CDS Name
 **
@@ -248,7 +253,10 @@
 **
 */
 #define CFE_MISSION_ES_CDS_MAX_NAME_LENGTH 16
+#endif /* CFE_EDS_ENABLED_BUILD */
 
+#ifndef CFE_EDS_ENABLED_BUILD
+/* This parameter is defined in cfe_mission_eds_designparameters.h when CFE_EDS_ENABLED_BUILD is defined. */
 /**
 **  \cfeevscfg Maximum Event Message Length
 **
@@ -262,6 +270,7 @@
 **      Not Applicable
 */
 #define CFE_MISSION_EVS_MAX_MESSAGE_LENGTH 122
+#endif /* CFE_EDS_ENABLED_BUILD */
 
 /** \name Checksum/CRC algorithm identifiers */
 /** \{ */
@@ -285,6 +294,8 @@
 */
 #define CFE_MISSION_ES_DEFAULT_CRC CFE_MISSION_ES_CRC_16
 
+#ifndef CFE_EDS_ENABLED_BUILD
+/* This parameter is defined in cfe_mission_eds_designparameters.h when CFE_EDS_ENABLED_BUILD is defined. */
 /**
 **  \cfetblcfg Maximum Table Name Length
 **
@@ -300,6 +311,7 @@
 **       any possible neighboring fields without implicit padding.
 */
 #define CFE_MISSION_TBL_MAX_NAME_LENGTH 16
+#endif /* CFE_EDS_ENABLED_BUILD */
 
 /**
 **  \cfemissioncfg cFE Portable Message Numbers for Commands
@@ -373,6 +385,8 @@
 #define CFE_MISSION_SB_ONESUB_TLM_MSG       14
 #define CFE_MISSION_ES_MEMSTATS_TLM_MSG     16
 
+#ifndef CFE_EDS_ENABLED_BUILD
+/* This parameter is defined in cfe_mission_eds_designparameters.h when CFE_EDS_ENABLED_BUILD is defined. */
 /**
 **  \cfeescfg Mission Max Apps in a message
 **
@@ -388,7 +402,10 @@
 **       to exceed the max length.
 */
 #define CFE_MISSION_ES_MAX_APPLICATIONS 16
+#endif /* CFE_EDS_ENABLED_BUILD */
 
+#ifndef CFE_EDS_ENABLED_BUILD
+/* This parameter is defined in cfe_mission_eds_designparameters.h when CFE_EDS_ENABLED_BUILD is defined. */
 /**
 **  \cfeescfg Define Max Number of Performance IDs for messages
 **
@@ -405,7 +422,10 @@
 **
 */
 #define CFE_MISSION_ES_PERF_MAX_IDS 128
+#endif /* CFE_EDS_ENABLED_BUILD */
 
+#ifndef CFE_EDS_ENABLED_BUILD
+/* This parameter is defined in cfe_mission_eds_designparameters.h when CFE_EDS_ENABLED_BUILD is defined. */
 /** \cfeescfg Maximum number of block sizes in pool structures
 **
 **  \par Description:
@@ -425,7 +445,10 @@
 **
 */
 #define CFE_MISSION_ES_POOL_MAX_BUCKETS 17
+#endif /* CFE_EDS_ENABLED_BUILD */
 
+#ifndef CFE_EDS_ENABLED_BUILD
+/* This parameter is defined in cfe_mission_eds_designparameters.h when CFE_EDS_ENABLED_BUILD is defined. */
 /**
 **  \cfetblcfg Maximum Length of Full Table Name in messages
 **
@@ -445,7 +468,10 @@
 **       any possible neighboring fields without implicit padding.
 */
 #define CFE_MISSION_TBL_MAX_FULL_NAME_LEN (CFE_MISSION_TBL_MAX_NAME_LENGTH + CFE_MISSION_MAX_API_LEN + 4)
+#endif /* CFE_EDS_ENABLED BUILD */
 
+#ifndef CFE_EDS_ENABLED_BUILD
+/* This parameter is defined in cfe_mission_eds_designparameters.h when CFE_EDS_ENABLED_BUILD is defined. */
 /**
 **  \cfesbcfg Maximum Number of pipes that SB command/telemetry messages may hold
 **
@@ -462,7 +488,10 @@
 **
 */
 #define CFE_MISSION_SB_MAX_PIPES 64
+#endif /* CFE_EDS_ENABLED_BUILD */
 
+#ifndef CFE_EDS_ENABLED_BUILD
+/* This parameter is defined in cfe_mission_eds_designparameters.h when CFE_EDS_ENABLED_BUILD is defined. */
 /**
 **  \cfemissioncfg cFE Maximum length for pathnames within data exchange structures
 **
@@ -489,6 +518,7 @@
 **       any possible neighboring fields without implicit padding.
 */
 #define CFE_MISSION_MAX_PATH_LEN 64
+#endif /* CFE_EDS_ENABLED_BUILD */
 
 /**
 **  \cfemissioncfg cFE Maximum length for filenames within data exchange structures
@@ -517,6 +547,8 @@
 */
 #define CFE_MISSION_MAX_FILE_LEN 20
 
+#ifndef CFE_EDS_ENABLED_BUILD
+/* This parameter is defined in cfe_mission_eds_designparameters.h when CFE_EDS_ENABLED_BUILD is defined. */
 /**
 **  \cfemissioncfg cFE Maximum length for API names within data exchange structures
 **
@@ -542,7 +574,10 @@
 **       any possible neighboring fields without implicit padding.
 */
 #define CFE_MISSION_MAX_API_LEN 20
+#endif /* CFE_EDS_ENABLED_BUILD */
 
+#ifndef CFE_EDS_ENABLED_BUILD
+/* This parameter is defined in cfe_mission_eds_designparameters.h when CFE_EDS_ENABLED_BUILD is defined. */
 /**
 **  \cfeescfg Maximum Length of Full CDS Name in messages
 **
@@ -562,5 +597,6 @@
 **       any possible neighboring fields without implicit padding.
 */
 #define CFE_MISSION_ES_CDS_MAX_FULL_NAME_LEN (CFE_MISSION_ES_CDS_MAX_NAME_LENGTH + CFE_MISSION_MAX_API_LEN + 4)
+#endif /* CFE_EDS_ENABLED_BUILD */
 
 #endif /* SAMPLE_MISSION_CFG_H */

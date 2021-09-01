@@ -51,6 +51,7 @@
 #include "cfe_tbl_extern_typedefs.h" /* for "CFE_TBL_FileHdr_t" definition */
 #include "cfe_fs_extern_typedefs.h"  /* for "CFE_FS_HDR_DESC_MAX_LEN" definition */
 
+#ifndef CFE_EDS_ENABLED_BUILD
 /*
  * The definition of the file definition metadata that can be used by
  * external tools (e.g. elf2cfetbl) to generate CFE table data files.
@@ -65,6 +66,7 @@ typedef struct CFE_TBL_FileDef
                                                  */
     uint32 ObjectSize;                          /**< \brief Size, in bytes, of instantiated object */
 } CFE_TBL_FileDef_t;
+#endif /* CFE_EDS_ENABLED_BUILD */
 
 /** The CFE_TBL_FILEDEF macro can be used to simplify the declaration of a table image when using the elf2cfetbl
 utility.
@@ -95,7 +97,7 @@ utility.
 */
 
 #define CFE_TBL_FILEDEF(ObjName, TblName, Desc, Filename)                                                         \
-    static OS_USED CFE_TBL_FileDef_t CFE_TBL_FileDef = {#ObjName "\0", #TblName "\0", #Desc "\0", #Filename "\0", \
+           OS_USED CFE_TBL_FileDef_t CFE_TBL_FileDef = {#ObjName "\0", #TblName "\0", #Desc "\0", #Filename "\0", \
                                                         sizeof(ObjName)};
 
 /*************************************************************************/

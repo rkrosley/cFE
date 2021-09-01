@@ -33,7 +33,9 @@
 
 /* This header may be generated from an EDS file,
  * tools are available and the feature is enabled */
-#ifndef CFE_EDS_ENABLED_BUILD
+#ifdef CFE_EDS_ENABLED_BUILD
+#include "cfe_evs_eds_typedefs.h"
+#else
 
 #include "cfe_evs_msg.h" /* Required for CFE_EVS_LongEventTlm_t definition */
 
