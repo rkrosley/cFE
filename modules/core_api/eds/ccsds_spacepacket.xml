@@ -31,7 +31,7 @@
 <Package name="CCSDS" shortDescription="CCSDS Space Packet Protocol defintions">
 
    <DataTypeSet>
-      <IntegerDataType name="VersionId" shortDescription="The first 16 bits of a CCSDS Space Packet Header">
+      <IntegerDataType name="VersionId" shortDescription="The version of a CCSDS Space Packet Header">
         <IntegerDataEncoding sizeInBits="3" encoding="unsigned" />
         <Range>
           <MinMaxRange max="7" min="0" rangeType="inclusiveMinInclusiveMax"/>
@@ -39,29 +39,30 @@
       </IntegerDataType>
 
       <BooleanDataType name="SingleBitFlag" shortDescription="A single bit indicating true/false" />
+		 
+      <BooleanDataType name="PacketType" shortDescription="Whether packet is command; else telemetry">
+				<BooleanDataEncoding falseValue="zeroIsFalse" sizeInBits="1"/>
+			</BooleanDataType>
+		 
+      <BooleanDataType name="SecHdrFlag" shortDescription="Whether secondary header is present">
+				<BooleanDataEncoding falseValue="zeroIsFalse" sizeInBits="1"/>
+			</BooleanDataType>
 
-      <IntegerDataType name="SecHdrFlags" shortDescription="The first 16 bits of a CCSDS Space Packet Header">
-        <IntegerDataEncoding sizeInBits="2" encoding="unsigned" />
-        <Range>
-          <MinMaxRange max="3" min="0" rangeType="inclusiveMinInclusiveMax"/>
-        </Range>
-      </IntegerDataType>
-
-      <IntegerDataType name="AppId" shortDescription="The first 16 bits of a CCSDS Space Packet Header">
+      <IntegerDataType name="AppId" shortDescription="The application id of a CCSDS Space Packet Header">
         <IntegerDataEncoding sizeInBits="11" encoding="unsigned" byteOrder="bigEndian"/>
         <Range>
           <MinMaxRange max="2047" min="0" rangeType="inclusiveMinInclusiveMax"/>
         </Range>
       </IntegerDataType>
 
-      <IntegerDataType name="SeqFlag" shortDescription="The first 16 bits of a CCSDS Space Packet Header">
+      <IntegerDataType name="SeqFlag" shortDescription="The segmentation flags of a CCSDS Space Packet Header">
         <IntegerDataEncoding sizeInBits="2" encoding="unsigned" />
         <Range>
           <MinMaxRange max="3" min="0" rangeType="inclusiveMinInclusiveMax"/>
         </Range>
       </IntegerDataType>
 
-      <IntegerDataType name="SeqCount" shortDescription="The first 16 bits of a CCSDS Space Packet Header">
+      <IntegerDataType name="SeqCount" shortDescription="The sequence count of a CCSDS Space Packet Header">
         <IntegerDataEncoding sizeInBits="14" encoding="unsigned" byteOrder="bigEndian"/>
         <Range>
           <MinMaxRange max="16383" min="0" rangeType="inclusiveMinInclusiveMax"/>
@@ -99,62 +100,81 @@
          with existing CFE/CFS application source code that expects 3 uint16 values.  However the differences
          should be addressable by changing the accessor macros in the CFE source code.
       -->
-      <ContainerDataType name="BaseHdr" shortDescription="Space packet protocol header">
+      <ContainerDataType name="BaseHdr" shortDescription="Space packet protocol header" buffer="packed">
          <LongDescription>
             The Primary message header that is present in all CCSDS Space Protocol packets
          </LongDescription>
          <EntryList>
-					 <Entry name="StreamId" type="BASE_TYPES/uint8">
-						 <LongDescription>
-							 *&lt; \brief packet identifier word (stream ID)
-                       bits  shift   ------------ description ----------------
-                       0x07FF    0  : application ID
-                       0x0800   11  : secondary header: 0 = absent, 1 = present
-                       0x1000   12  : packet type:      0 = TLM, 1 = CMD
-                       0xE000   13  : CCSDS version:    0 = ver 1, 1 = ver 2
-						 </LongDescription>
-						 <ArrayDimensions>
-							 <Dimension size="2"/>
-						 </ArrayDimensions>
-					 </Entry>
-					 <Entry name="Sequence" type="BASE_TYPES/uint8">
-						 <LongDescription>
-							 *&lt; \brief packet sequence word
-                       bits  shift   ------------ description ----------------
-                       0x3FFF    0  : sequence count
-                       0xC000   14  : segmentation flags:  3 = complete packet
-						 </LongDescription>
-						 <ArrayDimensions>
-							 <Dimension size="2"/>
-						 </ArrayDimensions>
-					 </Entry>
-					 <Entry name="Length" type="BASE_TYPES/uint8">
-						 <LongDescription>
-							 *&lt; \brief packet length word
-                     bits  shift   ------------ description ----------------
-                     0xFFFF    0  : (total packet length) - 7
-						 </LongDescription>
-						 <ArrayDimensions>
-							 <Dimension size="2"/>
-						 </ArrayDimensions>
-					 </Entry>
-						<!-- The structure above is what FSW uses.  The structure below is defined by CCSDS.
-            <Entry name="VersionId" type="VersionId" shortDescription="CCSDS Version number" />
-            <Entry name="SecHdrFlags" type="SecHdrFlags" shortDescription="Secondary Header Presence and Type Flags" />
-            <Entry name="AppId" type="AppId" shortDescription="Packet identifier word (stream ID)" />
-            <Entry name="SeqFlag" type="SeqFlag" shortDescription="packet sequence word" />
-            <Entry name="Sequence" type="SeqCount" shortDescription="packet sequence word" />
+            <Entry name="VersionId" type="VersionId" shortDescription="CCSDS Version number">
+							<IntegerDataEncoding encoding="unsigned" sizeInBits="3"/>
+						</Entry>
+					  <Entry name="PacketType" type="PacketType" shortDescription="command; else telemetry">
+							<IntegerDataEncoding encoding="unsigned" sizeInBits="1"/>
+						</Entry>
+					  <Entry name="SecHdrFlag" type="SecHdrFlag" shortDescription="whether secondary header is present">
+							<IntegerDataEncoding encoding="unsigned" sizeInBits="1"/>
+						</Entry>
+            <Entry name="AppId" type="AppId" shortDescription="Packet identifier word (stream ID)">
+							<IntegerDataEncoding encoding="unsigned" sizeInBits="11"/>
+						</Entry>
+            <Entry name="SeqFlag" type="SeqFlag" shortDescription="packet sequence word">
+							<IntegerDataEncoding encoding="unsigned" sizeInBits="2"/>
+						</Entry>
+            <Entry name="Sequence" type="SeqCount" shortDescription="packet sequence word">
+							<IntegerDataEncoding encoding="unsigned" sizeInBits="14"/>
+						</Entry>
             <LengthEntry name="Length" type="LengthType" shortDescription="packet length word">
                 <PolynomialCalibrator>
                     <Term coefficient="1" exponent="1" />
                     <Term coefficient="7" exponent="0" />
                 </PolynomialCalibrator>
             </LengthEntry>
-						-->
          </EntryList>
       </ContainerDataType>
+		 <!--
+		 <ContainerDataType name="BaseHdr" shortDescription="Space packet protocol header">
+			 <LongDescription>
+				 The Primary message header that is present in all CCSDS Space Protocol packets
+			 </LongDescription>
+			 <EntryList>
+				 <Entry name="StreamId" type="BASE_TYPES/uint8">
+					 <LongDescription>
+						 *&lt; \brief packet identifier word (stream ID)
+						 bits  shift   ............ description .................
+						 0x07FF    0  : application ID
+						 0x0800   11  : secondary header: 0 = absent, 1 = present
+						 0x1000   12  : packet type:      0 = TLM, 1 = CMD
+						 0xE000   13  : CCSDS version:    0 = ver 1, 1 = ver 2
+					 </LongDescription>
+					 <ArrayDimensions>
+						 <Dimension size="2"/>
+					 </ArrayDimensions>
+				 </Entry>
+				 <Entry name="Sequence" type="BASE_TYPES/uint8">
+					 <LongDescription>
+						 *&lt; \brief packet sequence word
+						 bits  shift   ............ description ................
+						 0x3FFF    0  : sequence count
+						 0xC000   14  : segmentation flags:  3 = complete packet
+					 </LongDescription>
+					 <ArrayDimensions>
+						 <Dimension size="2"/>
+					 </ArrayDimensions>
+				 </Entry>
+				 <Entry name="Length" type="BASE_TYPES/uint8">
+					 <LongDescription>
+						 *&lt; \brief packet length word
+						 bits  shift   ............ description ................
+						 0xFFFF    0  : (total packet length) - 7
+					 </LongDescription>
+					 <ArrayDimensions>
+						 <Dimension size="2"/>
+					 </ArrayDimensions>
+				 </Entry>
+			 </EntryList>
+		 </ContainerDataType>-->
 
-      <ContainerDataType name="PriHdr" shortDescription="Space packet protocol header version 1">
+		 <ContainerDataType name="PriHdr" shortDescription="Space packet protocol header version 1">
          <!--<ConstraintSet>
            <ValueConstraint entry="VersionId" value="0" />
          </ConstraintSet>-->
@@ -191,6 +211,28 @@
 				</Range>
 			</IntegerDataType>
 
+		 <ContainerDataType name="APIDqualifiers" shortDescription="Space packet APID qualifier header" buffer="packed">
+        <LongDescription>
+           The APID qualifier header extension that is present in CCSDS version 2
+        </LongDescription>
+			 <EntryList>
+          <Entry name="EdsVersionId" type="EdsVersionId" shortDescription="EDS-specific datatype identifier">
+						<IntegerDataEncoding encoding="unsigned" sizeInBits="5"/>
+					</Entry>
+          <Entry name="Endian" type="SingleBitFlag" shortDescription="Reserved, always set FALSE">
+						<IntegerDataEncoding encoding="unsigned" sizeInBits="1"/>
+					</Entry>
+          <Entry name="Playback" type="SingleBitFlag" shortDescription="Set to TRUE if data is playback, FALSE for realtime">
+						<IntegerDataEncoding encoding="unsigned" sizeInBits="1"/>
+					</Entry>
+          <Entry name="SubsystemId" type="SubsystemId" shortDescription="Mission-defined usage">
+						<IntegerDataEncoding encoding="unsigned" sizeInBits="9"/>
+					</Entry>
+          <Entry name="SystemId" type="SystemId" shortDescription="Mission-defined usage" />
+			 </EntryList>
+		 </ContainerDataType>
+
+		 <!--
       <ContainerDataType name="APIDqualifiers" shortDescription="Space packet APID qualifier header">
         <LongDescription>
            The APID qualifier header extension that is present in CCSDS version 2
@@ -199,7 +241,7 @@
 					<Entry name="Subsystem" type="BASE_TYPES/uint8">
 						<LongDescription>
 							*&lt; \brief subsystem qualifier
-                        bits  shift   ------------ description ----------------
+                        bits  shift   ............ description ................
                         0x01FF   0  : Subsystem Id  mission defined
                         0x0200   9  : Playback flag  0 = original, 1 = playback
                         0x0400  10  : Endian:   Big = 0, Little (Intel) = 1
@@ -218,15 +260,8 @@
 							<Dimension size="2"/>
 						</ArrayDimensions>
 					</Entry>
-						<!-- The structure above is what FSW uses.  The structure below is defined by CCSDS.
-          <Entry name="EdsVersionId" type="EdsVersionId" shortDescription="EDS-specific datatype identifier" />
-          <Entry name="Endian" type="SingleBitFlag" shortDescription="Reserved, always set FALSE" />
-          <Entry name="Playback" type="SingleBitFlag" shortDescription="Set to TRUE if data is playback, FALSE for realtime" />
-          <Entry name="SubsystemId" type="SubsystemId" shortDescription="Mission-defined usage" />
-          <Entry name="SystemId" type="SystemId" shortDescription="Mission-defined usage" />
-					-->
         </EntryList>
-      </ContainerDataType>
+      </ContainerDataType>-->
 
       <!--
       The APID qualifier (aka Version 2) Primary Header:
@@ -284,7 +319,7 @@
 
 		 <ContainerDataType name="PacketContainer" shortDescription="A buffer capable of storing any Space Packet" >
          <EntryList>
-            <Entry name="Data" type="${CCSDS_SPACEPACKET/HEADER_TYPE}" shortDescription="Packet Content" />
+            <Entry name="Data" type="CCSDS/${CCSDS_SPACEPACKET/HEADER_TYPE}" shortDescription="Packet Content" />
          </EntryList>
       </ContainerDataType>
 

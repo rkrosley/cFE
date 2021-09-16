@@ -44,9 +44,10 @@
 		 </ContainerDataType>
 
 		 <ContainerDataType name="CommandHeader" shortDescription="Complete Command Packet Header">
-			 <!--<ConstraintSet>
-				 <ValueConstraint entry="Msg.Pri.SecHdrFlags" value="3" />
-			 </ConstraintSet>-->
+			 <ConstraintSet>
+				 <ValueConstraint entry="Msg.CCSDS.Pri.PacketType" value="1"/>
+				 <ValueConstraint entry="Msg.CCSDS.Pri.SecHdrFlag" value="1" />
+			 </ConstraintSet>
 			 <EntryList>
 				 <Entry name="Msg" type="Message_t"/>
 				 <Entry name="Sec" type="CCSDS/CmdSecHdr" shortDescription="Command Secondary Header" />
@@ -54,9 +55,10 @@
 		 </ContainerDataType>
 
 		 <ContainerDataType name="TelemetryHeader" shortDescription="Complete Telemetry Packet Header">
-			 <!--<ConstraintSet>
-				 <ValueConstraint entry="Msg.Pri.SecHdrFlags" value="1" />
-			 </ConstraintSet>-->
+			 <ConstraintSet>
+				 <ValueConstraint entry="Msg.CCSDS.Pri.PacketType" value="0"/>
+				 <ValueConstraint entry="Msg.CCSDS.Pri.SecHdrFlag" value="1"/>
+			 </ConstraintSet>
 			 <EntryList>
 				 <Entry name="Msg" type="Message_t"/>
 				 <Entry name="Sec" type="CCSDS/TlmSecHdr" shortDescription="Telemetry Secondary Header" />

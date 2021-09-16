@@ -2205,6 +2205,7 @@
 				<EntryList>
 					<Entry name="Handle" type="CFE_ES_CDSHandle" shortDescription="*&lt; \brief Handle of CDS"/>
 					<Entry name="Size" type="MemOffset_t" shortDescription="*&lt; \brief Size, in bytes, of the CDS memory block"/>
+					<PaddingEntry sizeInBits="7"/>
 					<Entry name="Table" type="BASE_TYPES/StatusBit"
 								 shortDescription="*&lt; \brief Flag that indicates whether CDS contains a Critical Table"/>
 				  <Entry name="Name" type="BASE_TYPES/CDSName" shortDescription="*&lt; \brief Processor Unique Name of CDS"/>

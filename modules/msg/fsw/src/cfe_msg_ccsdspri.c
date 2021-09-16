@@ -80,8 +80,13 @@ CFE_Status_t CFE_MSG_GetHeaderVersion(const CFE_MSG_Message_t *MsgPtr, CFE_MSG_H
         return CFE_MSG_BAD_ARGUMENT;
     }
 
-    CFE_MSG_GetHeaderField(MsgPtr->CCSDS.Pri.StreamId, Version, CFE_MSG_CCSDSVER_MASK);
-    *Version >>= CFE_MSG_CCSDSVER_SHIFT;
+    CCSDS_VersionId_Atom_t ver;
+    CFE_Status_t result = CCSDS_get_VersionId(&(MsgPtr->CCSDS.Pri), &ver);
+    if (result != CFE_SUCCESS)
+    {
+        return result;
+    }
+    *Version = ver;
 
     return CFE_SUCCESS;
 }
@@ -101,7 +106,12 @@ CFE_Status_t CFE_MSG_SetHeaderVersion(CFE_MSG_Message_t *MsgPtr, CFE_MSG_HeaderV
         return CFE_MSG_BAD_ARGUMENT;
     }
 
-    CFE_MSG_SetHeaderField(MsgPtr->CCSDS.Pri.StreamId, Version << CFE_MSG_CCSDSVER_SHIFT, CFE_MSG_CCSDSVER_MASK);
+    CCSDS_VersionId_Atom_t ver = Version;
+    CFE_Status_t result = CCSDS_set_VersionId(&(MsgPtr->CCSDS.Pri), ver);
+    if (result != CFE_SUCCESS)
+    {
+        return result;
+    }
 
     return CFE_SUCCESS;
 }
@@ -122,7 +132,13 @@ CFE_Status_t CFE_MSG_GetType(const CFE_MSG_Message_t *MsgPtr, CFE_MSG_Type_t *Ty
         return CFE_MSG_BAD_ARGUMENT;
     }
 
-    if ((MsgPtr->CCSDS.Pri.StreamId[0] & (CFE_MSG_TYPE_MASK >> 8)) != 0)
+    CCSDS_PacketType_t pkt;
+    CFE_Status_t result = CCSDS_get_PacketType(&(MsgPtr->CCSDS.Pri), &pkt);
+    if (result != CFE_SUCCESS)
+    {
+        return result;
+    }
+    if (pkt != 0)
     {
         *Type = CFE_MSG_Type_Cmd;
     }
@@ -151,18 +167,20 @@ CFE_Status_t CFE_MSG_SetType(CFE_MSG_Message_t *MsgPtr, CFE_MSG_Type_t Type)
         return CFE_MSG_BAD_ARGUMENT;
     }
 
+    CCSDS_PacketType_t pkt = 0;
     if (Type == CFE_MSG_Type_Cmd)
     {
-        MsgPtr->CCSDS.Pri.StreamId[0] |= CFE_MSG_TYPE_MASK >> 8;
+        pkt = 1;
     }
     else if (Type == CFE_MSG_Type_Tlm)
     {
-        MsgPtr->CCSDS.Pri.StreamId[0] &= ~(CFE_MSG_TYPE_MASK >> 8);
+        pkt = 0;
     }
     else
     {
         status = CFE_MSG_BAD_ARGUMENT;
     }
+    status = CCSDS_set_PacketType(&(MsgPtr->CCSDS.Pri), pkt);
 
     return status;
 }
@@ -183,7 +201,13 @@ CFE_Status_t CFE_MSG_GetHasSecondaryHeader(const CFE_MSG_Message_t *MsgPtr, bool
         return CFE_MSG_BAD_ARGUMENT;
     }
 
-    *HasSecondary = (MsgPtr->CCSDS.Pri.StreamId[0] & (CFE_MSG_SHDR_MASK >> 8)) != 0;
+    CCSDS_SecHdrFlag_t sec;
+    CFE_Status_t result = CCSDS_get_SecHdrFlag(&(MsgPtr->CCSDS.Pri), &sec);
+    if (result != CFE_SUCCESS)
+    {
+        return result;
+    }
+    *HasSecondary = sec != 0;
 
     return CFE_SUCCESS;
 }
@@ -203,13 +227,19 @@ CFE_Status_t CFE_MSG_SetHasSecondaryHeader(CFE_MSG_Message_t *MsgPtr, bool HasSe
         return CFE_MSG_BAD_ARGUMENT;
     }
 
+    CCSDS_SecHdrFlag_t sec = 0;
     if (HasSecondary)
     {
-        MsgPtr->CCSDS.Pri.StreamId[0] |= CFE_MSG_SHDR_MASK >> 8;
+        sec = 1;
     }
     else
     {
-        MsgPtr->CCSDS.Pri.StreamId[0] &= ~(CFE_MSG_SHDR_MASK >> 8);
+        sec = 0;
+    }
+    CFE_Status_t result = CCSDS_set_SecHdrFlag(&(MsgPtr->CCSDS.Pri), sec);
+    if (result != CFE_SUCCESS)
+    {
+        return result;
     }
 
     return CFE_SUCCESS;
@@ -231,7 +261,13 @@ CFE_Status_t CFE_MSG_GetApId(const CFE_MSG_Message_t *MsgPtr, CFE_MSG_ApId_t *Ap
         return CFE_MSG_BAD_ARGUMENT;
     }
 
-    CFE_MSG_GetHeaderField(MsgPtr->CCSDS.Pri.StreamId, ApId, CFE_MSG_APID_MASK);
+    CCSDS_AppId_Atom_t apid;
+    CFE_Status_t result = CCSDS_get_AppId(&(MsgPtr->CCSDS.Pri), &apid);
+    if (result != CFE_SUCCESS)
+    {
+        return result;
+    }
+    *ApId = apid;
 
     return CFE_SUCCESS;
 }
@@ -251,7 +287,12 @@ CFE_Status_t CFE_MSG_SetApId(CFE_MSG_Message_t *MsgPtr, CFE_MSG_ApId_t ApId)
         return CFE_MSG_BAD_ARGUMENT;
     }
 
-    CFE_MSG_SetHeaderField(MsgPtr->CCSDS.Pri.StreamId, ApId, CFE_MSG_APID_MASK);
+    CCSDS_AppId_Atom_t apid = ApId;
+    CFE_Status_t result = CCSDS_set_AppId(&(MsgPtr->CCSDS.Pri), apid);
+    if (result != CFE_SUCCESS)
+    {
+        return result;
+    }
 
     return CFE_SUCCESS;
 }
@@ -274,7 +315,13 @@ CFE_Status_t CFE_MSG_GetSegmentationFlag(const CFE_MSG_Message_t *MsgPtr, CFE_MS
         return CFE_MSG_BAD_ARGUMENT;
     }
 
-    CFE_MSG_GetHeaderField(MsgPtr->CCSDS.Pri.Sequence, &rawval, CFE_MSG_SEGFLG_MASK);
+    CCSDS_SeqFlag_Atom_t seg;
+    CFE_Status_t result = CCSDS_get_SeqFlag(&(MsgPtr->CCSDS.Pri), &seg);
+    if (result != CFE_SUCCESS)
+    {
+        return result;
+    }
+    rawval = seg;
 
     switch (rawval)
     {
@@ -334,7 +381,8 @@ CFE_Status_t CFE_MSG_SetSegmentationFlag(CFE_MSG_Message_t *MsgPtr, CFE_MSG_Segm
 
     if (status == CFE_SUCCESS)
     {
-        CFE_MSG_SetHeaderField(MsgPtr->CCSDS.Pri.Sequence, rawval, CFE_MSG_SEGFLG_MASK);
+        CCSDS_SeqFlag_Atom_t seg = rawval;
+        status = CCSDS_set_SeqFlag(&(MsgPtr->CCSDS.Pri), seg);
     }
 
     return status;
@@ -356,7 +404,13 @@ CFE_Status_t CFE_MSG_GetSequenceCount(const CFE_MSG_Message_t *MsgPtr, CFE_MSG_S
         return CFE_MSG_BAD_ARGUMENT;
     }
 
-    CFE_MSG_GetHeaderField(MsgPtr->CCSDS.Pri.Sequence, SeqCnt, CFE_MSG_SEQCNT_MASK);
+    CCSDS_SeqCount_Atom_t seq;
+    CFE_Status_t result = CCSDS_get_Sequence(&(MsgPtr->CCSDS.Pri), &seq);
+    if (result != CFE_SUCCESS)
+    {
+        return result;
+    }
+    *SeqCnt = seq;
 
     return CFE_SUCCESS;
 }
@@ -376,7 +430,12 @@ CFE_Status_t CFE_MSG_SetSequenceCount(CFE_MSG_Message_t *MsgPtr, CFE_MSG_Sequenc
         return CFE_MSG_BAD_ARGUMENT;
     }
 
-    CFE_MSG_SetHeaderField(MsgPtr->CCSDS.Pri.Sequence, SeqCnt, CFE_MSG_SEQCNT_MASK);
+    CCSDS_SeqCount_Atom_t seq = SeqCnt;
+    CFE_Status_t result = CCSDS_set_Sequence(&(MsgPtr->CCSDS.Pri), seq);
+    if (result != CFE_SUCCESS)
+    {
+        return result;
+    }
 
     return CFE_SUCCESS;
 }
@@ -417,7 +476,13 @@ CFE_Status_t CFE_MSG_GetSize(const CFE_MSG_Message_t *MsgPtr, CFE_MSG_Size_t *Si
         return CFE_MSG_BAD_ARGUMENT;
     }
 
-    *Size = (MsgPtr->CCSDS.Pri.Length[0] << 8) + MsgPtr->CCSDS.Pri.Length[1] + CFE_MSG_SIZE_OFFSET;
+    CCSDS_LengthType_Atom_t len;
+    CFE_Status_t result = CCSDS_get_Length(&(MsgPtr->CCSDS.Pri), &len);
+    if (result != CFE_SUCCESS)
+    {
+        return result;
+    }
+    *Size = len + CFE_MSG_SIZE_OFFSET;
 
     return CFE_SUCCESS;
 }
@@ -440,8 +505,12 @@ CFE_Status_t CFE_MSG_SetSize(CFE_MSG_Message_t *MsgPtr, CFE_MSG_Size_t Size)
     /* Size is CCSDS header is total packet size - CFE_MSG_SIZE_OFFSET (7) */
     Size -= CFE_MSG_SIZE_OFFSET;
 
-    MsgPtr->CCSDS.Pri.Length[0] = (Size >> 8) & 0xFF;
-    MsgPtr->CCSDS.Pri.Length[1] = Size & 0xFF;
+    CCSDS_LengthType_Atom_t len = Size;
+    CFE_Status_t result = CCSDS_set_Length(&(MsgPtr->CCSDS.Pri), len);
+    if (result != CFE_SUCCESS)
+    {
+        return result;
+    }
 
     return CFE_SUCCESS;
 }
