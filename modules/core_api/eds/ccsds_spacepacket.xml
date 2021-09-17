@@ -131,53 +131,11 @@
             </LengthEntry>
          </EntryList>
       </ContainerDataType>
-		 <!--
-		 <ContainerDataType name="BaseHdr" shortDescription="Space packet protocol header">
-			 <LongDescription>
-				 The Primary message header that is present in all CCSDS Space Protocol packets
-			 </LongDescription>
-			 <EntryList>
-				 <Entry name="StreamId" type="BASE_TYPES/uint8">
-					 <LongDescription>
-						 *&lt; \brief packet identifier word (stream ID)
-						 bits  shift   ............ description .................
-						 0x07FF    0  : application ID
-						 0x0800   11  : secondary header: 0 = absent, 1 = present
-						 0x1000   12  : packet type:      0 = TLM, 1 = CMD
-						 0xE000   13  : CCSDS version:    0 = ver 1, 1 = ver 2
-					 </LongDescription>
-					 <ArrayDimensions>
-						 <Dimension size="2"/>
-					 </ArrayDimensions>
-				 </Entry>
-				 <Entry name="Sequence" type="BASE_TYPES/uint8">
-					 <LongDescription>
-						 *&lt; \brief packet sequence word
-						 bits  shift   ............ description ................
-						 0x3FFF    0  : sequence count
-						 0xC000   14  : segmentation flags:  3 = complete packet
-					 </LongDescription>
-					 <ArrayDimensions>
-						 <Dimension size="2"/>
-					 </ArrayDimensions>
-				 </Entry>
-				 <Entry name="Length" type="BASE_TYPES/uint8">
-					 <LongDescription>
-						 *&lt; \brief packet length word
-						 bits  shift   ............ description ................
-						 0xFFFF    0  : (total packet length) - 7
-					 </LongDescription>
-					 <ArrayDimensions>
-						 <Dimension size="2"/>
-					 </ArrayDimensions>
-				 </Entry>
-			 </EntryList>
-		 </ContainerDataType>-->
 
 		 <ContainerDataType name="PriHdr" shortDescription="Space packet protocol header version 1">
-         <!--<ConstraintSet>
-           <ValueConstraint entry="VersionId" value="0" />
-         </ConstraintSet>-->
+         <ConstraintSet>
+           <ValueConstraint entry="Pri.VersionId" value="0" />
+         </ConstraintSet>
 				<EntryList>
 					<Entry name="Pri" type="BaseHdr"/>
 				</EntryList>
@@ -232,37 +190,6 @@
 			 </EntryList>
 		 </ContainerDataType>
 
-		 <!--
-      <ContainerDataType name="APIDqualifiers" shortDescription="Space packet APID qualifier header">
-        <LongDescription>
-           The APID qualifier header extension that is present in CCSDS version 2
-        </LongDescription>
-        <EntryList>
-					<Entry name="Subsystem" type="BASE_TYPES/uint8">
-						<LongDescription>
-							*&lt; \brief subsystem qualifier
-                        bits  shift   ............ description ................
-                        0x01FF   0  : Subsystem Id  mission defined
-                        0x0200   9  : Playback flag  0 = original, 1 = playback
-                        0x0400  10  : Endian:   Big = 0, Little (Intel) = 1
-                        0xF800  11  : EDS Version for packet definition used
-						</LongDescription>
-						<ArrayDimensions>
-							<Dimension size="2"/>
-						</ArrayDimensions>
-					</Entry>
-					<Entry name="SystemId" type="BASE_TYPES/uint8">
-						<LongDescription>
-							*&lt; \brief system qualifier
-                       0xFFFF   0  : System Id      mission defined
-						</LongDescription>
-						<ArrayDimensions>
-							<Dimension size="2"/>
-						</ArrayDimensions>
-					</Entry>
-        </EntryList>
-      </ContainerDataType>-->
-
       <!--
       The APID qualifier (aka Version 2) Primary Header:
          This is the the same as the version 1 primary header but extended with APID qualifier data
@@ -271,9 +198,9 @@
          <LongDescription>
             The APID qualified primary header that is present in all CCSDS Space Protocol version 2 packets
          </LongDescription>
-         <!--<ConstraintSet>
-           <ValueConstraint entry="VersionId" value="1" />
-         </ConstraintSet>-->
+         <ConstraintSet>
+           <ValueConstraint entry="Pri.VersionId" value="1" />
+         </ConstraintSet>
          <EntryList>
 					 <Entry name="Pri" type="BaseHdr"/>
            <Entry name="Ext" type="APIDqualifiers" shortDescription="APID qualifiers" />
